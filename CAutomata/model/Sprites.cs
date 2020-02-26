@@ -16,19 +16,19 @@ namespace LuxC.model
 
             new Pixel(new Point(-2,-1),ConsoleColor.Red,ConsoleCharacter.Light),
             new Pixel(new Point(-1,-1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,-1),ConsoleColor.Magenta,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-1),ConsoleColor.Magenta,ConsoleCharacter.Dark),
             new Pixel(new Point(1,-1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
             new Pixel(new Point(2,-1),ConsoleColor.Red,ConsoleCharacter.Light),
             
             new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
-            new Pixel(new Point(-1,0),ConsoleColor.Magenta,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,0),ConsoleColor.Magenta,ConsoleCharacter.Dark),
             new Pixel(new Point(0,0),ConsoleColor.Yellow,ConsoleCharacter.Full),
-            new Pixel(new Point(1,0),ConsoleColor.Magenta,ConsoleCharacter.Medium),
+            new Pixel(new Point(1,0),ConsoleColor.Magenta,ConsoleCharacter.Dark),
             new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
             
             new Pixel(new Point(-2,1),ConsoleColor.Red,ConsoleCharacter.Light),
             new Pixel(new Point(-1,1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,1),ConsoleColor.Magenta,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,1),ConsoleColor.Magenta,ConsoleCharacter.Dark),
             new Pixel(new Point(1,1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
             new Pixel(new Point(2,1),ConsoleColor.Red,ConsoleCharacter.Light),
             
@@ -94,31 +94,31 @@ namespace LuxC.model
         };
 
         public static readonly List<Pixel> blackVertibra = new List<Pixel> {
-            new Pixel(new Point(-1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
-            new Pixel(new Point(1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,-2),ConsoleColor.Black,ConsoleCharacter.Light),
+            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(1,-2),ConsoleColor.Black,ConsoleCharacter.Light),
 
-            new Pixel(new Point(-2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
-            new Pixel(new Point(-1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,-1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
-            new Pixel(new Point(1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
-            new Pixel(new Point(2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-2,-1),ConsoleColor.Black,ConsoleCharacter.Light),
+            new Pixel(new Point(-1,-1),ConsoleColor.Black,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-1),ConsoleColor.DarkRed,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-1),ConsoleColor.Black,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,-1),ConsoleColor.Black,ConsoleCharacter.Light),
 
-            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
-            new Pixel(new Point(-1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(-1,0),ConsoleColor.DarkRed,ConsoleCharacter.Dark),
             new Pixel(new Point(0,0),ConsoleColor.Black,ConsoleCharacter.Full),
-            new Pixel(new Point(1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
-            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,0),ConsoleColor.DarkRed,ConsoleCharacter.Dark),
+            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Light),
 
-            new Pixel(new Point(-2,1),ConsoleColor.White,ConsoleCharacter.Medium),
-            new Pixel(new Point(-1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
-            new Pixel(new Point(1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
-            new Pixel(new Point(2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-2,1),ConsoleColor.Black,ConsoleCharacter.Light),
+            new Pixel(new Point(-1,1),ConsoleColor.Black,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,1),ConsoleColor.DarkRed,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,1),ConsoleColor.Black,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,1),ConsoleColor.Black,ConsoleCharacter.Light),
 
-            new Pixel(new Point(-1,2),ConsoleColor.White,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
-            new Pixel(new Point(1,2),ConsoleColor.White,ConsoleCharacter.Medium)
+            new Pixel(new Point(-1,2),ConsoleColor.Black,ConsoleCharacter.Light),
+            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(1,2),ConsoleColor.Black,ConsoleCharacter.Light)
         };
 
         public static readonly List<Pixel> palette = new List<Pixel> { 
