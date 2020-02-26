@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B7FEC033-E95B-4447-87FE-F5BB7C885F5B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>CAutomata</RootNamespace>
-    <AssemblyName>CAutomata</AssemblyName>
+    <RootNamespace>LuxC</RootNamespace>
+    <AssemblyName>LuxC</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -5,26 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleGameEngine;
 
-namespace CAutomata.model
+namespace LuxC.model
 {
     public struct Sprites
     {
         public static readonly List<Pixel> redVertibra = new List<Pixel> {
             new Pixel(new Point(-1,-2),ConsoleColor.Red,ConsoleCharacter.Light),
-            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
             new Pixel(new Point(1,-2),ConsoleColor.Red,ConsoleCharacter.Light),
 
             new Pixel(new Point(-2,-1),ConsoleColor.Red,ConsoleCharacter.Light),
             new Pixel(new Point(-1,-1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,-1),ConsoleColor.Magenta,ConsoleCharacter.Dark),
+            new Pixel(new Point(0,-1),ConsoleColor.Magenta,ConsoleCharacter.Medium),
             new Pixel(new Point(1,-1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
             new Pixel(new Point(2,-1),ConsoleColor.Red,ConsoleCharacter.Light),
             
-            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
             new Pixel(new Point(-1,0),ConsoleColor.Magenta,ConsoleCharacter.Medium),
-            new Pixel(new Point(0,0),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(0,0),ConsoleColor.Yellow,ConsoleCharacter.Full),
             new Pixel(new Point(1,0),ConsoleColor.Magenta,ConsoleCharacter.Medium),
-            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
             
             new Pixel(new Point(-2,1),ConsoleColor.Red,ConsoleCharacter.Light),
             new Pixel(new Point(-1,1),ConsoleColor.DarkRed,ConsoleCharacter.Medium),
@@ -33,36 +33,92 @@ namespace CAutomata.model
             new Pixel(new Point(2,1),ConsoleColor.Red,ConsoleCharacter.Light),
             
             new Pixel(new Point(-1,2),ConsoleColor.Red,ConsoleCharacter.Light),
-            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Light),
+            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
             new Pixel(new Point(1,2),ConsoleColor.Red,ConsoleCharacter.Light)
         };
 
         public static readonly List<Pixel> blueVertibra = new List<Pixel> {
-            new Pixel(new Point(-1,-2),ConsoleColor.Cyan),
-            new Pixel(new Point(0,-2),ConsoleColor.White),
-            new Pixel(new Point(1,-2),ConsoleColor.Cyan),
+            new Pixel(new Point(-1,-2),ConsoleColor.Cyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-2),ConsoleColor.Cyan,ConsoleCharacter.Medium),
 
-            new Pixel(new Point(-2,-1),ConsoleColor.Cyan),
-            new Pixel(new Point(-1,-1),ConsoleColor.DarkCyan),
-            new Pixel(new Point(0,-1),ConsoleColor.Blue),
-            new Pixel(new Point(1,-1),ConsoleColor.DarkCyan),
-            new Pixel(new Point(2,-1),ConsoleColor.Cyan),
+            new Pixel(new Point(-2,-1),ConsoleColor.Cyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,-1),ConsoleColor.DarkCyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-1),ConsoleColor.Blue,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-1),ConsoleColor.DarkCyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,-1),ConsoleColor.Cyan,ConsoleCharacter.Medium),
 
-            new Pixel(new Point(-2,0),ConsoleColor.White),
-            new Pixel(new Point(-1,0),ConsoleColor.Blue),
-            new Pixel(new Point(0,0),ConsoleColor.DarkBlue),
-            new Pixel(new Point(1,0),ConsoleColor.Blue),
-            new Pixel(new Point(2,0),ConsoleColor.White),
+            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(-1,0),ConsoleColor.Blue,ConsoleCharacter.Dark),
+            new Pixel(new Point(0,0),ConsoleColor.DarkBlue,ConsoleCharacter.Full),
+            new Pixel(new Point(1,0),ConsoleColor.Blue,ConsoleCharacter.Dark),
+            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
 
-            new Pixel(new Point(-2,1),ConsoleColor.Cyan),
-            new Pixel(new Point(-1,1),ConsoleColor.DarkCyan),
-            new Pixel(new Point(0,1),ConsoleColor.Blue),
-            new Pixel(new Point(1,1),ConsoleColor.DarkCyan),
-            new Pixel(new Point(2,1),ConsoleColor.Cyan),
+            new Pixel(new Point(-2,1),ConsoleColor.Cyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,1),ConsoleColor.DarkCyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,1),ConsoleColor.Blue,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,1),ConsoleColor.DarkCyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,1),ConsoleColor.Cyan,ConsoleCharacter.Medium),
 
-            new Pixel(new Point(-1,2),ConsoleColor.Cyan),
-            new Pixel(new Point(0,2),ConsoleColor.White),
-            new Pixel(new Point(1,2),ConsoleColor.Cyan)
+            new Pixel(new Point(-1,2),ConsoleColor.Cyan,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,2),ConsoleColor.Cyan,ConsoleCharacter.Medium)
+        };
+
+        public static readonly List<Pixel> whiteVertibra = new List<Pixel> {
+            new Pixel(new Point(-1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(-1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(0,0),ConsoleColor.White,ConsoleCharacter.Full),
+            new Pixel(new Point(1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+
+            new Pixel(new Point(-2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-1,2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,2),ConsoleColor.White,ConsoleCharacter.Medium)
+        };
+
+        public static readonly List<Pixel> blackVertibra = new List<Pixel> {
+            new Pixel(new Point(-1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,-1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(-1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(0,0),ConsoleColor.Black,ConsoleCharacter.Full),
+            new Pixel(new Point(1,0),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+
+            new Pixel(new Point(-2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(-1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,1),ConsoleColor.Yellow,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Pixel(new Point(2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Pixel(new Point(-1,2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Pixel(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Pixel(new Point(1,2),ConsoleColor.White,ConsoleCharacter.Medium)
         };
 
         public static readonly List<Pixel> palette = new List<Pixel> { 
@@ -82,8 +138,6 @@ namespace CAutomata.model
             new Pixel(new Point(3, 1), ConsoleColor.DarkGreen),
             new Pixel(new Point(3, 2), ConsoleColor.DarkBlue),
             new Pixel(new Point(3, 3), ConsoleColor.Black)
-
-
         };
         
 

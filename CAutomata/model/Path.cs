@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ConsoleGameEngine;
-namespace CAutomata.model
+namespace LuxC.model
 {
     public class Path
     {

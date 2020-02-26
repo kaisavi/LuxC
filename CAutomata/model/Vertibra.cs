@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ConsoleGameEngine;
 
-namespace CAutomata.model
+namespace LuxC.model
 {
     public class Vertibra : Sprite
     {
@@ -40,7 +40,21 @@ namespace CAutomata.model
                 case ConsoleColor.Blue:
                     pixels = Sprites.blueVertibra;
                     break;
+                case ConsoleColor.White:
+                    pixels = Sprites.whiteVertibra;
+                    break;
+                case ConsoleColor.Black:
+                    pixels = Sprites.blackVertibra;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException("Invalid color for vertabrate");
             }
+        }
+
+        internal void setColor(ConsoleColor color)
+        {
+            this.color = color;
+            loadSprite();
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsoleGameEngine;
 
-namespace CAutomata.model
+namespace LuxC.model
 {
     public class Pixel
     {

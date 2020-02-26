@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CAutomata.model
+namespace LuxC.model
 {
     class Callithump
     {
