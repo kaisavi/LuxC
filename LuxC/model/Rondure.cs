@@ -4,7 +4,7 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public class Rondure : Sprite
+    public class Rondure : Leprechaun
     {
         
         

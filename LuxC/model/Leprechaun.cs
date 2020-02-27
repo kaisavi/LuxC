@@ -7,17 +7,17 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public abstract class Sprite : Drawable
+    public abstract class Leprechaun : Drawable
     {
         Point position;
-        protected List<Pixel> pixels = Sprites.palette;
+        protected List<Fragment> pixels = Sprites.palette;
 
         public Point Position { get => position; set => position = value; }
 
         
         public override void Draw()
         {
-            foreach(Pixel pixel in pixels)
+            foreach(Fragment pixel in pixels)
             {
                 engine.SetPixel(pixel.Position + position, (int)pixel.Color, pixel.Character);
             }

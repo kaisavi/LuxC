@@ -69,8 +69,8 @@
     <Compile Include="model\PaletteSprite.cs" />
     <Compile Include="model\Sprites.cs" />
     <Compile Include="model\Path.cs" />
-    <Compile Include="model\Pixel.cs" />
-    <Compile Include="model\Sprite.cs" />
+    <Compile Include="model\Fragment.cs" />
+    <Compile Include="model\Leprechaun.cs" />
     <Compile Include="model\Rondure.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

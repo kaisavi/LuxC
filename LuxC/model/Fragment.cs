@@ -7,7 +7,7 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public class Pixel
+    public class Fragment
     {
         private Point position;
         private ConsoleColor color;
@@ -17,7 +17,7 @@ namespace LuxC.model
         public ConsoleColor Color { get => color; set => color = value; }
         public ConsoleCharacter Character { get => character; set => character = value; }
 
-        public Pixel(Point position, ConsoleColor color = ConsoleColor.White, ConsoleCharacter character = ConsoleCharacter.Full)
+        public Fragment(Point position, ConsoleColor color = ConsoleColor.White, ConsoleCharacter character = ConsoleCharacter.Full)
         {
             this.position = position;
             this.color = color;
