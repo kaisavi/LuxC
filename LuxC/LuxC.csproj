@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controller\Lux.cs" />
     <Compile Include="model\BezierCurve.cs" />
     <Compile Include="model\Callithump.cs" />
     <Compile Include="model\Drawable.cs" />
