@@ -7,10 +7,11 @@ namespace LuxC.model
     public class Rondure : Leprechaun
     {
         
-        
-        Point nextPosition;
         ConsoleColor color;
-        bool isHead;
+        private bool isHead = false;
+        private double progress = -1;
+
+        public double Progress { get => progress; set => progress = value; }
 
         public int checkNeighbors ()
         {
@@ -56,5 +57,13 @@ namespace LuxC.model
             this.color = color;
             loadSprite();
         }
+
+        public void setAsHead()
+        {
+            isHead = true;
+        }
+
+
+        
     }
 }

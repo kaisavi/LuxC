@@ -9,12 +9,12 @@ using LuxC.Controller;
 
 namespace LuxC
 {
-    class Program
+    class OrderOfBusiness
     {
         static void Main(string[] args)
         {
             Lux lux = new Lux();
-            lux.Construct(240, 132, 8, 8, FramerateMode.MaxFps);
+            lux.Construct(240, 132, 8, 8, FramerateMode.Unlimited);
         }
     }
 }

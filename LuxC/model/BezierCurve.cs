@@ -11,7 +11,8 @@ namespace LuxC.model
     class BezierCurve
     {
         private double[] FactorialLookup;
-        const int POINTS_ON_CURVE = 512;
+        const int POINTS_PER_CONTROL = 64;
+
         public BezierCurve()
         {
             CreateFactorialTable();
@@ -103,8 +104,9 @@ namespace LuxC.model
 
         public List<Point> Bezier2D(List<Point> controlPoints)
         {
-            double[] p = new double[POINTS_ON_CURVE];
-            int cpts = POINTS_ON_CURVE / 2;
+            int totalPoints = POINTS_PER_CONTROL * controlPoints.Count();
+            double[] p = new double[totalPoints];
+            int cpts = totalPoints / 2;
             double[] b = getbFromPoints(controlPoints);
 
             int npts = (b.Length) / 2;
@@ -143,27 +145,11 @@ namespace LuxC.model
         {
             List<Point> points = new List<Point>();
 
-            for (int i = 1; i != POINTS_ON_CURVE - 1; i += 2)
-            {
-
+            for (int i = 1; i != p.Length - 1; i += 2) {
                 points.Add(new Point((int)p[i + 1], (int) p[i]));
-                
             }
-            Point prevPoint = points[0];
-
-            Console.WriteLine(points.Count);
-            /*
-            for (int i = 1; i < points.Count; i++)
-            {
-                if (points[i].X == prevPoint.X && points[i].Y == prevPoint.Y)
-                    points.RemoveAt(i);
-                prevPoint = points[i];
-            }*/
-
             
-            Console.WriteLine("Make distinct");
             points = points.Distinct().ToList();
-            Console.WriteLine(points.Count);
             return points;
         }
 
