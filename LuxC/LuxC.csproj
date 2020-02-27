@@ -68,7 +68,7 @@
     <Compile Include="model\Drawable.cs" />
     <Compile Include="model\PaletteSprite.cs" />
     <Compile Include="model\Sprites.cs" />
-    <Compile Include="model\Path.cs" />
+    <Compile Include="model\Thoroughfare.cs" />
     <Compile Include="model\Fragment.cs" />
     <Compile Include="model\Leprechaun.cs" />
     <Compile Include="model\Rondure.cs" />
