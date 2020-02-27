@@ -4,7 +4,7 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public class Vertibra : Sprite
+    public class Rondure : Sprite
     {
         
         
@@ -24,7 +24,7 @@ namespace LuxC.model
             return 0;
         }
 
-        public Vertibra(ConsoleColor color)
+        public Rondure(ConsoleColor color)
         {
             this.color = color;
             loadSprite();
