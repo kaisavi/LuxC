@@ -9,7 +9,7 @@ namespace LuxC.model
     class Callithump
     {
         Path path = new Path();
-        List<Vertibra> vertibrae = new List<Vertibra>();
+        List<Rondure> vertibrae = new List<Rondure>();
         public void update()
         {
 
