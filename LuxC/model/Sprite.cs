@@ -7,25 +7,20 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public abstract class Sprite
+    public abstract class Sprite : Drawable
     {
         Point position;
-        private static ConsoleEngine engine;
         protected List<Pixel> pixels = Sprites.palette;
 
         public Point Position { get => position; set => position = value; }
 
-        public void draw()
+        
+        public override void Draw()
         {
             foreach(Pixel pixel in pixels)
             {
                 engine.SetPixel(pixel.Position + position, (int)pixel.Color, pixel.Character);
             }
-        }
-
-        public static void setEngine(ConsoleEngine e)
-        {
-            engine = e;
         }
 
     }

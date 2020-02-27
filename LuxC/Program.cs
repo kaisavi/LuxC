@@ -13,30 +13,33 @@ namespace LuxC
         static void Main(string[] args)
         {
             ConsoleEngine graphicsEngine = new ConsoleEngine(240,132,8,8);
-            Sprite.setEngine(graphicsEngine);
-            graphicsEngine.Borderless();
+            Drawable.setEngine(graphicsEngine);
+            //graphicsEngine.Borderless();
             graphicsEngine.SetBackground(8);
 
-            Vertibra v = new Vertibra(ConsoleColor.Blue);
+            Rondure v = new Rondure(ConsoleColor.Blue);
             v.Position = new Point(10, 12);
-            v.draw();
+            v.Draw();
 
             v.setColor(ConsoleColor.Red);
             v.Position = new Point(10, 18);
-            v.draw();
+            v.Draw();
 
             v.setColor(ConsoleColor.White);
             v.Position = new Point(16, 12);
-            v.draw();
+            v.Draw();
 
             v.setColor(ConsoleColor.Black);
             v.Position = new Point(16, 18);
-            v.draw();
+            v.Draw();
 
             PaletteSprite palette = new PaletteSprite();
             palette.Position = new Point(0, 0);
-            palette.draw();
+            palette.Draw();
 
+            Path path = new Path();
+            path.Draw();
+            Console.Read();
             graphicsEngine.DisplayBuffer();
             Console.Read();
         }
