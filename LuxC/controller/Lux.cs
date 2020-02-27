@@ -8,6 +8,8 @@ namespace LuxC.Controller
     {
 
         Rondure r = new Rondure(ConsoleColor.Blue);
+        private double timeScale = .1;
+        private double time = 0;
 
         public override void Create()
         {
@@ -21,9 +23,14 @@ namespace LuxC.Controller
 
         public override void Render()
         {
+            Engine.WriteText(new Point(16, 0), GetFramerate().ToString(), 15);
             Engine.ClearBuffer();
             DrawOrbs();
             DrawPath();
+
+            PaletteSprite palette = new PaletteSprite();
+            palette.Position = new Point(0, 0);
+            palette.Draw();
 
             Engine.DisplayBuffer();
         }
@@ -37,14 +44,13 @@ namespace LuxC.Controller
         {
             r.Draw();
         
-            PaletteSprite palette = new PaletteSprite();
-            palette.Position = new Point(0, 0);
-            palette.Draw();
+      
         }
 
         public override void Update()
         {
-            
+            time += DeltaTime * timeScale;
+            r.Position = new Point((int)(16 * Math.Sin(time)) + 32, (int)(16*Math.Cos(time) + 32));
         }
     }
 }
