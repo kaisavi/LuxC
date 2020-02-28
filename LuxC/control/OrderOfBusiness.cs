@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using LuxC.model;
 using ConsoleGameEngine;
-using LuxC.Controller;
+using LuxC.control;
 
-namespace LuxC
+namespace LuxC.control
 {
     class OrderOfBusiness
     {
