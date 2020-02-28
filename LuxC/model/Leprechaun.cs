@@ -10,7 +10,7 @@ namespace LuxC.model
     public abstract class Leprechaun : Drawable
     {
         Point position;
-        protected List<Fragment> pixels = Sprites.palette;
+        protected List<Fragment> pixels = Leprechauns.palette;
 
         public Point Position { get => position; set => position = value; }
 

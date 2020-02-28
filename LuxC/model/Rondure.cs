@@ -39,16 +39,16 @@ namespace LuxC.model
             switch(color)
             {
                 case ConsoleColor.Red:
-                    pixels = Sprites.redVertibra;
+                    pixels = Leprechauns.redVertibra;
                     break;
                 case ConsoleColor.Blue:
-                    pixels = Sprites.blueVertibra;
+                    pixels = Leprechauns.blueVertibra;
                     break;
                 case ConsoleColor.White:
-                    pixels = Sprites.whiteVertibra;
+                    pixels = Leprechauns.whiteVertibra;
                     break;
                 case ConsoleColor.Black:
-                    pixels = Sprites.blackVertibra;
+                    pixels = Leprechauns.blackVertibra;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("Invalid color for vertabrate");
