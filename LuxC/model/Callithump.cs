@@ -9,7 +9,7 @@ namespace LuxC.model
 {
     class Callithump
     {
-        private Thoroughfare thoroughfare = new Thoroughfare(new List<Point>
+        public Thoroughfare Thoroughfare { get; } = new Thoroughfare(new List<Point>
         {
             new Point(-10,16),
 
@@ -37,28 +37,43 @@ namespace LuxC.model
             new Point(30,14),
             new Point(34,16),
         });
-        public Thoroughfare Thoroughfare { get => thoroughfare; }
-
-        private List<Rondure> rondures = new List<Rondure> { new Rondure(ConsoleColor.Black) };
-        public List<Rondure> Rondures { get => rondures; }
+        public List<Rondure> Rondures { get; } = new List<Rondure> { 
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red),
+            new Rondure(ConsoleColor.Red) 
+        };
 
         int speed = 6;
 
         public void update(float deltaTime)
         {
             
-            if (rondures[0].Progress < thoroughfare.Length)
+            if (Rondures[0].Progress < Thoroughfare.Length)
             {
                 destroy(0);
             }
 
-            Point nextPosition = rondures[0].Position;
-            rondures[0].Progress += speed * deltaTime;
-            rondures[0].Position = thoroughfare.Points[(int) Math.Floor(rondures[0].Progress + 1)];
+            Point nextPosition = Rondures[0].Position;
+            Rondures[0].Progress += speed * deltaTime;
+            Rondures[0].Position = Thoroughfare.Points[Math.Max((int) Math.Floor(Rondures[0].Progress), 0)];
 
-            foreach(Rondure r in rondures)
+            for(int i = 1; i < Rondures.Count; i++)
             {
-                
+
+                Rondures[i].Position = Thoroughfare.Points[Math.Max((int)Math.Floor(Rondures[0].Progress - (8 * i)), 0)];
             }
         }
 
