@@ -12,6 +12,9 @@ namespace LuxC.model
         private double progress = -1;
 
         public double Progress { get => progress; set => progress = value; }
+        internal RondureMode Mode { get => mode; set => mode = value; }
+
+        private RondureMode mode = RondureMode.NORMAL;
 
         public int checkNeighbors ()
         {

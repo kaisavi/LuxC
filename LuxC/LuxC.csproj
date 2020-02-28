@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>LuxC.OrderOfBusiness</StartupObject>
+    <StartupObject>LuxC.control.OrderOfBusiness</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>LuxC.ico</ApplicationIcon>
@@ -73,6 +73,7 @@
     <Compile Include="model\Callithump.cs" />
     <Compile Include="model\Drawable.cs" />
     <Compile Include="model\PaletteSprite.cs" />
+    <Compile Include="model\RondureMode.cs" />
     <Compile Include="model\Sprites.cs" />
     <Compile Include="model\Thoroughfare.cs" />
     <Compile Include="model\Fragment.cs" />

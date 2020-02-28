@@ -73,11 +73,12 @@ namespace LuxC.model
 
             for (int i = Rondures.Count - 1; i > 0; i--)
             {
-                    Rondures[i].Progress = Rondures.Last().Progress - (8 * ((Rondures.Count - 1) - i));
+                    Rondures[i].Progress = Rondures.Last().Progress - (7 * ((Rondures.Count - 1) - i));
 
                 if (Rondures[i].Progress >= Thoroughfare.Length - 1.5)
                 {
                     destroy(Rondures[i]);
+                    Rondures.Last().Mode = RondureMode.HEAD;
                     continue;
                 }
 
@@ -92,7 +93,7 @@ namespace LuxC.model
 
         public Callithump()
         {
-
+            //Rondures.First().Mode = RondureMode.TAIL;
         }
     }
 }
