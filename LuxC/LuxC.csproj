@@ -68,7 +68,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="control\Lux.cs" />
+    <Compile Include="controller\Lux.cs" />
     <Compile Include="model\BezierCurve.cs" />
     <Compile Include="model\Callithump.cs" />
     <Compile Include="model\Drawable.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="model\Fragment.cs" />
     <Compile Include="model\Leprechaun.cs" />
     <Compile Include="model\Rondure.cs" />
-    <Compile Include="control\OrderOfBusiness.cs" />
+    <Compile Include="OrderOfBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

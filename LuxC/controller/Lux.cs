@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ConsoleGameEngine;
 using LuxC.model;
 
-namespace LuxC.control
+namespace LuxC.Controller
 {
     class Lux : ConsoleGame
     {
