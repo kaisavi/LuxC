@@ -56,31 +56,38 @@ namespace LuxC.model
             new Rondure(ConsoleColor.Red) 
         };
 
-        int speed = 6;
+        int speed = 12;
 
         public void update(float deltaTime)
         {
-            
-            if (Rondures[0].Progress < Thoroughfare.Length)
-            {
-                destroy(0);
-            }
+            advance(deltaTime);
 
-            Point nextPosition = Rondures[0].Position;
-            Rondures[0].Progress += speed * deltaTime;
-            Rondures[0].Position = Thoroughfare.Points[Math.Max((int) Math.Floor(Rondures[0].Progress), 0)];
-
-            for(int i = 1; i < Rondures.Count; i++)
-            {
-
-                Rondures[i].Position = Thoroughfare.Points[Math.Max((int)Math.Floor(Rondures[0].Progress - (8 * i)), 0)];
-            }
         }
 
 
-        private void destroy(int index)
+        private void advance(float deltaTime)
         {
             
+            Rondures.Last().Progress += speed * deltaTime;
+
+
+            for (int i = Rondures.Count - 1; i > 0; i--)
+            {
+                    Rondures[i].Progress = Rondures.Last().Progress - (8 * ((Rondures.Count - 1) - i));
+
+                if (Rondures[i].Progress >= Thoroughfare.Length - 1.5)
+                {
+                    destroy(Rondures[i]);
+                    continue;
+                }
+
+                Rondures[i].Position = Thoroughfare.Points[Math.Max((int)Math.Floor(Rondures[i].Progress), 0)];
+            }
+        }
+
+        private void destroy(Rondure rondure)
+        {
+            Rondures.Remove(rondure);
         }
 
         public Callithump()
