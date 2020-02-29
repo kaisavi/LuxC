@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace LuxC.model
 {
-    class PaletteSprite : Sprite
-    {
-        
+    class PaletteSprite : Sprite {
+        //For debugging and development
     }
 }

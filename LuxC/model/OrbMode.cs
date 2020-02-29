@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LuxC.model
 {
-    enum OrbMode
+    public enum OrbMode
     {
         NORMAL = 0,
         HEAD = 1,

@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace LuxC.model
 {
     //Console size: 240x132
-    class Parade : Drawable
-    {
+    class Parade : Drawable {
+
         private CollisionManager collisionManager;
-        public Path Path { get; } = new Path(new List<Point>
-        {
+        public Path Path { get; } = new Path(new List<Point> {
+            
             new Point(-10,16),
             
             new Point(75,17),
@@ -22,25 +22,17 @@ namespace LuxC.model
             new Point(250,16),
             
         });
-        public List<Orb> Orbs { get; } = new List<Orb> { 
+        public List<Orb> Orbs { get; }
 
+        private int speed = 12;
 
-        };
-
-        int speed = 12;
-
-        public void update(float deltaTime)
-        {
-            
-
+        public void update(float deltaTime) {
             if(Orbs.Count > 0)
                 advance(deltaTime);
-
         }
 
 
-        private void advance(float deltaTime)
-        {
+        private void advance(float deltaTime) {
             
             Orbs.Last().Progress += speed * deltaTime;
 
@@ -52,8 +44,10 @@ namespace LuxC.model
                 if (Orbs[i].Progress >= Path.Length - 1)
                 {
                     destroy(Orbs[i]);
+
                     if(Orbs.Count != 0)
                         Orbs.Last().Mode = OrbMode.HEAD;
+
                     break;
                 }
 
@@ -82,13 +76,14 @@ namespace LuxC.model
         }
 
 
-        public Parade(CollisionManager collisionManager)
-        {
+        public Parade(CollisionManager collisionManager) {
             this.collisionManager = collisionManager;
             Orbs = new List<Orb> {
-            new Orb(ConsoleColor.Blue,collisionManager),
+            new Orb(ConsoleColor.Blue,collisionManager)
 
-        };
+            };
         }
+
     }
+
 }

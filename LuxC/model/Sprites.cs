@@ -140,8 +140,7 @@ namespace LuxC.model
             new Fragment(new Point(3, 3), ConsoleColor.Black)
         };
 
-        public static readonly List<Fragment> bombard = new List<Fragment>
-        {
+        public static readonly List<Fragment> ballista = new List<Fragment> {
             new Fragment(new Point(-4,4)),
             new Fragment(new Point(4,4)),
             
@@ -153,7 +152,6 @@ namespace LuxC.model
             new Fragment(new Point(5,3)),
             
             new Fragment(new Point(-4,3)),
-
 
         };
         

@@ -7,30 +7,30 @@ namespace LuxC.model
     public class Orb : CollisionSprite
     {
 
-        ConsoleColor color;
-        private double progress = -1;
+        private ConsoleColor color;
+        internal void setColor(ConsoleColor color) {
+            this.color = color;
+            loadSprite();
+        }
 
-        public double Progress { get => progress; set => progress = value; }
-        internal OrbMode Mode { get; set; } = OrbMode.NORMAL;
+        public double Progress { get; set; } = -1;
+        public OrbMode Mode { get; set; } = OrbMode.NORMAL;
 
-        public int checkNeighbors()
-        {
-
+        public int checkNeighbors() {
+            //TODO: Orb nieghbor checks
             return 0;
         }
 
-        public int checkNeighbors(bool left)
-        {
-
+        public int checkNeighbors(bool left) {
+            //TODO: Orb directional checks
             return 0;
         }
 
-        public Orb(ConsoleColor color, CollisionManager collisionManager) : base(collisionManager){
+        public Orb(ConsoleColor color, CollisionManager collisionManager) : base(collisionManager) {
             setColor(color);
         }
 
-        private void loadSprite()
-        {
+        private void loadSprite() {
             switch(color)
             {
                 case ConsoleColor.Red:
@@ -52,11 +52,7 @@ namespace LuxC.model
 
         
 
-        internal void setColor(ConsoleColor color)
-        {
-            this.color = color;
-            loadSprite();
-        }
+
 
        
     }

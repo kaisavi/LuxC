@@ -8,8 +8,7 @@ namespace LuxC.model
         private List<Collision> collisions = new List<Collision>();
         public void registerForCollision(Orb a,List<Orb> B) {
             
-                switch(a.Mode)
-                {
+                switch(a.Mode) {
                     case OrbMode.FIRED:
                         collisions.Add(new Collision(a, B));
                         break;
@@ -27,6 +26,7 @@ namespace LuxC.model
         }
 
         private List<Orb> findStray(List<Orb> B) {
+
             foreach (Orb b in B) {
                 if(b is Orb) {
                     if (((Orb)b).Mode.Equals(OrbMode.STRAY))
@@ -37,17 +37,16 @@ namespace LuxC.model
         }
     }
 
-    internal class Collision
-    {
+
+    internal class Collision {
+
         private Orb a;
         private List<Orb> B;
 
-        public Collision(Orb a, List<Orb> B)
-        {
+        public Collision(Orb a, List<Orb> B) {
             this.a = a;
             this.B = B;
         }
-
 
         public void update() {
             a.CollidingBodies.Clear();
@@ -57,5 +56,7 @@ namespace LuxC.model
                 }
             }
         }
+
     }
+
 }

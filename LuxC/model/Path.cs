@@ -5,20 +5,19 @@ namespace LuxC.model
 {
     public class Path : Drawable
     {
-        private List<Point> points = new List<Point>();
 
-        public List<Point> Points { get => points; }
+        public List<Point> Points { get; }
 
-        public int Length { get => points.Count; }
+        public int Length { get => Points.Count; }
 
         public Path(List<Point> controlPoints) {
-            points = new BezierCurve().Bezier2D(controlPoints);
+            Points = new BezierCurve().Bezier2D(controlPoints);
         }
 
 
         public override void Draw()
         {                                      
-            foreach(Point p in points) {
+            foreach(Point p in Points) {
                 engine.SetPixel(p, (int)ConsoleColor.DarkBlue,ConsoleCharacter.Light);
             }
         }

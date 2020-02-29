@@ -11,15 +11,14 @@ namespace LuxC.model
         Orb[] ammo = new Orb[3];
 
 
-        public void fire()
-        {
-
+        public void fire() {
+            //TODO: Ballista orb firing
         }
 
 
         public Ballista()
         {
-            fragments = Sprites.bombard;
+            fragments = Sprites.ballista;
         }
 
         public override void Draw() {

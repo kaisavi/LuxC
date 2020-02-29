@@ -15,10 +15,8 @@ namespace LuxC.model
         public Point Position { get => position; set => position = value; }
 
         
-        public override void Draw()
-        {
-            foreach(Fragment frag in fragments)
-            {
+        public override void Draw() {
+            foreach(Fragment frag in fragments) {
                 engine.SetPixel(frag.Position + position, (int)frag.Color, frag.Character);
             }
         }
