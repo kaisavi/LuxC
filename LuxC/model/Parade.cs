@@ -13,13 +13,13 @@ namespace LuxC.model
         private CollisionManager collisionManager;
         public Path Path { get; } = new Path(new List<Point> {
             
-            new Point(-10,16),
+            new Point(-10,75),
             
-            new Point(75,17),
-            new Point(125,17),
-            new Point(200,17),
+            new Point(75,76),
+            new Point(125,75),
+            new Point(200,75),
             
-            new Point(250,16),
+            new Point(250,75),
             
         });
         public List<Orb> Orbs { get; }
@@ -75,10 +75,29 @@ namespace LuxC.model
             }
         }
 
+        public void insert(Orb o) {
+            if (o.Position.X > o.CollidingBodies[0].Position.X)
+                ((Orb)o.CollidingBodies[0]).SetColor(OrbColor.RED);
+            else
+                ((Orb)o.CollidingBodies[0]).SetColor(OrbColor.BLACK);
+        }
+
 
         public Parade(CollisionManager collisionManager) {
             this.collisionManager = collisionManager;
             Orbs = new List<Orb> {
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),

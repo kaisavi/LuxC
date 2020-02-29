@@ -8,14 +8,13 @@ using LuxC.control;
 
 namespace LuxC.model
 {
-    //TODO: IT'S BROKEN!! (current task) 
 
     class Ballista : Sprite
     {
         Orb[] ammo = new Orb[2];
         Orb firedOrb;
         private readonly CollisionManager collisionManager;
-        Lux context;
+        Parade parade;
         private bool nextOrbLoaded = true;
 
         public void Fire() {
@@ -26,7 +25,7 @@ namespace LuxC.model
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
 
-                collisionManager.registerForCollision(firedOrb, context.Parade.Orbs);
+                collisionManager.registerForCollision(firedOrb, parade.Orbs);
                                 
             }
 
@@ -36,9 +35,9 @@ namespace LuxC.model
             return new Orb(OrbColor.BLACK,collisionManager);
         }
 
-        public Ballista(Lux context, CollisionManager collisionManager)
+        public Ballista(Parade parade, CollisionManager collisionManager)
         {
-            this.context = context;
+            this.parade = parade;
 
             fragments = Sprites.ballista;
             this.collisionManager = collisionManager;
@@ -50,13 +49,18 @@ namespace LuxC.model
 
         public void Update() {
             ammo[0].Position = this.Position - new Point(0, 5);
-                    
 
-                if (firedOrb.Position.Y > 0 && firedOrb.CollidingBodies.Count < 1) {
-                    firedOrb.Position += new Point(0, -3);
-                } 
-                else
-                    nextOrbLoaded = true;
+
+            if (firedOrb.Position.Y > -16) {
+                firedOrb.Position += new Point(0, -3);
+            }
+            else
+                nextOrbLoaded = true;
+            if (firedOrb.CollidingBodies.Count() > 0) {
+                parade.insert(firedOrb);
+                firedOrb.Position = new Point(-16, -16);
+                nextOrbLoaded = true;
+            }
 
         }
 

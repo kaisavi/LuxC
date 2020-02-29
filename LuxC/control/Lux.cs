@@ -25,7 +25,7 @@ namespace LuxC.control
             Engine.SetBackground(8);
 
             Parade = new Parade(collisionManager);
-            ballista = new Ballista(this, collisionManager);
+            ballista = new Ballista(Parade, collisionManager);
 
 
             o = new Orb(OrbColor.WHITE, collisionManager);

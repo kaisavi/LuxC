@@ -51,7 +51,7 @@ namespace LuxC.model
         public void update() {
             a.CollidingBodies.Clear();
             for(int i = 0; i < B.Count; i++) {
-                if (Math.Abs(B[i].Position.X - a.Position.X) < 8 && Math.Abs(B[i].Position.Y - a.Position.Y) < 8 && !a.CollidingBodies.Contains(B[i])) {
+                if (Math.Abs(B[i].Position.X - a.Position.X) < 7 && Math.Abs(B[i].Position.Y - a.Position.Y) < 7 && !a.CollidingBodies.Contains(B[i])) {
                     a.CollidingBodies.Add(B[i]);
                 }
             }
