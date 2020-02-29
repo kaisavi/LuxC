@@ -13,7 +13,7 @@ namespace LuxC.model
     class Ballista : Sprite
     {
         Orb[] ammo = new Orb[2];
-        List<Orb> firedOrbs;
+        Orb firedOrb;
         private readonly CollisionManager collisionManager;
         Lux context;
         private bool nextOrbLoaded = true;
@@ -21,9 +21,12 @@ namespace LuxC.model
         public void Fire() {
             if(nextOrbLoaded) {
                 nextOrbLoaded = false;
-                firedOrbs.Add(ammo[0]);
+                firedOrb = ammo[0];
+                firedOrb.Mode = OrbMode.FIRED;
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
+
+                collisionManager.registerForCollision(firedOrb, context.Parade.Orbs);
                                 
             }
 
@@ -41,45 +44,51 @@ namespace LuxC.model
             this.collisionManager = collisionManager;
             for (int i = 0; i < 2; i++)
                 ammo[i] = new Orb(OrbColor.BLUE, collisionManager);
+            firedOrb = new Orb(OrbColor.RED, collisionManager);
             Position = new Point(120, 128);
-
-            firedOrbs = new List<Orb>();
         }
 
         public void Update() {
             ammo[0].Position = this.Position - new Point(0, 5);
-            if(firedOrbs.Count > 0)
-                if (firedOrbs.Last().Position.Y < 110 && !nextOrbLoaded)
+                    
+
+                if (firedOrb.Position.Y > 0 && firedOrb.CollidingBodies.Count < 1) {
+                    firedOrb.Position += new Point(0, -3);
+                } 
+                else
                     nextOrbLoaded = true;
 
-            for(int i = 0; i < firedOrbs.Count(); i++) {
-                if (firedOrbs[i].Position.Y > 0)
-                    firedOrbs[i].Position += new Point(0, -1);
-                else
-                    destroy(firedOrbs[i]);
-            }
-        }
-
-        private void destroy(Orb o) {
-            firedOrbs.Remove(o);
         }
 
         public override void Draw() {
             base.Draw();
             if(nextOrbLoaded)
                 ammo[0].Draw();
-            engine.SetPixel(Position, (int)ammo[0].Color);
-            if (firedOrbs.Count > 0)
-                foreach (Orb o in firedOrbs)
-                    o.Draw();
-
-            engine.WriteText(new Point(0, 0), firedOrbs.Count().ToString(), 15);
+            engine.SetPixel(Position, getHoldColor(ammo[1].Color));
+            firedOrb.Draw();
+            engine.WriteText(firedOrb.Position + new Point(5, 0), firedOrb.CollidingBodies.Count().ToString(),15);
             
         }
 
         internal void Move(int v) {
             if ( (Position.X > 7 && Math.Sign(v) == -1) || (Position.X < 233 && Math.Sign(v) == 1) )
-                Position += new Point(v, 0);                
+                Position += new Point(v, 0);          
+        }
+
+        private int getHoldColor(OrbColor color) {
+            switch(color) {
+                case OrbColor.RED:
+                    return (int)ConsoleColor.DarkRed;
+                case OrbColor.BLUE:
+                    return (int)ConsoleColor.Blue;
+                case OrbColor.WHITE:
+                    return (int)ConsoleColor.White;
+                case OrbColor.BLACK:
+                    return (int)ConsoleColor.Black;
+                default:
+                    return 0;
+            }
+                
         }
     }
 }

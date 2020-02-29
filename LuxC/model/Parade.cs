@@ -79,7 +79,10 @@ namespace LuxC.model
         public Parade(CollisionManager collisionManager) {
             this.collisionManager = collisionManager;
             Orbs = new List<Orb> {
-            new Orb(ConsoleColor.Blue,collisionManager)
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager)
 
             };
         }

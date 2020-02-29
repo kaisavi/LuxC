@@ -53,10 +53,8 @@ namespace LuxC.model
     }
 }
 
+
 internal enum OrbColor {
-    //
-    // Summary:
-    //     Red Orb
     RED = 0,
     BLUE = 1,
     WHITE = 2,
