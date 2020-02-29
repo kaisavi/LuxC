@@ -12,7 +12,7 @@ namespace LuxC.control
     {
         private CollisionManager collisionManager = new CollisionManager();
 
-        Parade parade;
+        public Parade Parade { get; private set; }
         Ballista ballista;
         Orb o;
 
@@ -24,15 +24,15 @@ namespace LuxC.control
             Engine.Borderless();
             Engine.SetBackground(8);
 
-            parade = new Parade(collisionManager);
-            ballista = new Ballista(collisionManager);
+            Parade = new Parade(collisionManager);
+            ballista = new Ballista(this, collisionManager);
 
 
             o = new Orb(ConsoleColor.White, collisionManager);
             o.Mode = OrbMode.FIRED;
             o.Position = new Point(120, 16);
             
-            collisionManager.registerForCollision(o, parade.Orbs);
+            collisionManager.registerForCollision(o, Parade.Orbs);
 
             palette.Position = new Point(236, 128);
 
@@ -44,7 +44,7 @@ namespace LuxC.control
             Engine.ClearBuffer();
 
             o.Draw();
-            parade.Draw();
+            Parade.Draw();
             ballista.Draw();
 
             DrawDebug();
@@ -62,17 +62,25 @@ namespace LuxC.control
         }
 
 
-        public override void Update()
-        {
+        public override void Update() {
             time += DeltaTime;
+
+            if (Engine.GetKey(ConsoleKey.LeftArrow))
+                ballista.Move(-1);
+            if (Engine.GetKey(ConsoleKey.RightArrow))
+                ballista.Move(1);
+            if (Engine.GetKey(ConsoleKey.Spacebar))
+                ballista.Fire();
+
             CheckCollisions();
-            parade.update(DeltaTime);
+            Parade.update(DeltaTime);
             ballista.Update();
         }
 
         private void CheckCollisions() {
             collisionManager.updateCollisions();
         }
+
 
     }
 }
