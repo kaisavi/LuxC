@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LuxC.model
 {
-    class PaletteSprite : Leprechaun
+    class PaletteSprite : Sprite
     {
         
     }

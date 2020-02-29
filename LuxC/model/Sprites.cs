@@ -7,7 +7,7 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public struct Leprechauns
+    public struct Sprites
     {
         public static readonly List<Fragment> redVertibra = new List<Fragment> {
             new Fragment(new Point(-1,-2),ConsoleColor.Red,ConsoleCharacter.Light),
@@ -142,10 +142,19 @@ namespace LuxC.model
 
         public static readonly List<Fragment> bombard = new List<Fragment>
         {
-            new Fragment(new Point(-3,0)),
-            new Fragment(new Point(-3,0)),
-            new Fragment(new Point(-3,0)),
-            new Fragment(new Point(-3,0)),
+            new Fragment(new Point(-4,4)),
+            new Fragment(new Point(4,4)),
+            
+            new Fragment(new Point(-5,3)),
+            new Fragment(new Point(-4,3)),
+            new Fragment(new Point(-3,3)),
+            new Fragment(new Point(3,3)),
+            new Fragment(new Point(4,3)),
+            new Fragment(new Point(5,3)),
+            
+            new Fragment(new Point(-4,3)),
+
+
         };
         
     }

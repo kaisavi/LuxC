@@ -11,7 +11,7 @@ namespace LuxC.model
     class BezierCurve
     {
         private double[] FactorialLookup;
-        const int POINTS_PER_CONTROL = 64;
+        const int POINTS_PER_CONTROL = 128;
 
         public BezierCurve()
         {

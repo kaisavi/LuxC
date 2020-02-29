@@ -2,70 +2,83 @@
 using System.Collections.Generic;
 using ConsoleGameEngine;
 using LuxC.model;
+using System.Threading;
 
 namespace LuxC.control
 {
+
+    //Console size: 240x132 
     class Lux : ConsoleGame
     {
+        CollisionManager collisionManager = new CollisionManager();
 
-        Rondure r = new Rondure(ConsoleColor.Blue);
-        //Thoroughfare t = new Thoroughfare(new List<Point> { } );
-        Callithump c = new Callithump();
+        Parade p;
+        Ballista b = new Ballista();
+        Orb o;
 
-        private double timeScale = 1;
-        private double time = 0;
+        PaletteSprite palette = new PaletteSprite();
 
+        float time = 0;
         public override void Create()
         {
-            Drawable.setEngine(Engine);
-            TargetFramerate = 30;
             Drawable.setEngine(Engine);
             Engine.Borderless();
             Engine.SetBackground(8);
 
+            p = new Parade(collisionManager);
+
+            o = new Orb(ConsoleColor.White, collisionManager);
+            o.Mode = OrbMode.FIRED;
+            o.Position = new Point(120, 16);
+            
+            collisionManager.registerForCollision(o, p.Orbs);
+
+            palette.Position = new Point(236, 128);
+
+
+
+
+        }
+
+        private void collisionUpdate() {
+            while(true) {
+                checkCollisions();
+            }
         }
 
         public override void Render()
         {
             Engine.ClearBuffer();
-            
-            Engine.WriteText(new Point(224, 0), GetFramerate().ToString(), 0,15);
-            Engine.WriteText(new Point(224, 1), time.ToString(), 0,15);
-            Engine.WriteText(new Point(224, 2), DeltaTime.ToString(), 0,15);
-            
-            DrawThoroughfare();
-            DrawRondures();
 
-            PaletteSprite palette = new PaletteSprite();
-            palette.Position = new Point(236, 128);
-            palette.Draw();
+            o.Draw();
+            p.Draw();
+
+            DrawDebug();
 
             Engine.DisplayBuffer();
         }
 
-        private void DrawThoroughfare()
-        {
-            //t.Draw();
+        private void DrawDebug() {
 
-            c.Thoroughfare.Draw();
+            palette.Draw();
+            Engine.WriteText(new Point(224, 0), GetFramerate().ToString(), 0,15);
+            Engine.WriteText(new Point(224, 1), time.ToString(), 0,15);
+            Engine.WriteText(new Point(224, 2), DeltaTime.ToString(), 0,15);
+           
         }
 
-        private void DrawRondures()
-        {
-            //r.Draw();
-        
-            foreach(Rondure rondure in c.Rondures)
-            {
-                rondure.Draw();
-            }
-        }
 
         public override void Update()
         {
-            time += DeltaTime * timeScale;
-
-            //r.Position = new Point((int)(16 * Math.Sin(2*time*Math.PI)) + 32, (int)(16*Math.Cos(2*time*Math.PI) + 32));
-            c.update(DeltaTime);
+            time += DeltaTime;
+            checkCollisions();
+            p.update(DeltaTime);
         }
+
+        private void checkCollisions()
+        {
+            collisionManager.updateCollisions();
+        }
+
     }
 }

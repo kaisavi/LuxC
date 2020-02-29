@@ -9,7 +9,7 @@ using LuxC.control;
 
 namespace LuxC.control
 {
-    class OrderOfBusiness
+    class Entry
     {
         static void Main(string[] args)
         {

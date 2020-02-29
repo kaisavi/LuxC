@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>LuxC.control.OrderOfBusiness</StartupObject>
+    <StartupObject>LuxC.control.Entry</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>LuxC.ico</ApplicationIcon>
@@ -70,17 +70,19 @@
   <ItemGroup>
     <Compile Include="control\Lux.cs" />
     <Compile Include="model\BezierCurve.cs" />
-    <Compile Include="model\Bombard.cs" />
-    <Compile Include="model\Callithump.cs" />
+    <Compile Include="model\Ballista.cs" />
+    <Compile Include="model\Parade.cs" />
+    <Compile Include="model\CollisionManager.cs" />
     <Compile Include="model\Drawable.cs" />
     <Compile Include="model\PaletteSprite.cs" />
-    <Compile Include="model\RondureMode.cs" />
-    <Compile Include="model\Leprechauns.cs" />
-    <Compile Include="model\Thoroughfare.cs" />
+    <Compile Include="model\CollisionSprite.cs" />
+    <Compile Include="model\OrbMode.cs" />
+    <Compile Include="model\Sprites.cs" />
+    <Compile Include="model\Path.cs" />
     <Compile Include="model\Fragment.cs" />
-    <Compile Include="model\Leprechaun.cs" />
-    <Compile Include="model\Rondure.cs" />
-    <Compile Include="control\OrderOfBusiness.cs" />
+    <Compile Include="model\Sprite.cs" />
+    <Compile Include="model\Orb.cs" />
+    <Compile Include="control\Entry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

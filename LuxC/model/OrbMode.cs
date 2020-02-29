@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace LuxC.model
 {
-    enum RondureMode
+    enum OrbMode
     {
         NORMAL = 0,
         HEAD = 1,
         TAIL = 2,
-        STRAY = 3
+        STRAY = 3,
+        FIRED = 4
     }
 }
