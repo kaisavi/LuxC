@@ -141,18 +141,36 @@ namespace LuxC.model
         };
 
         public static readonly List<Fragment> ballista = new List<Fragment> {
-            new Fragment(new Point(-4,4)),
-            new Fragment(new Point(4,4)),
+            new Fragment(new Point(-4,-3),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 4,-3),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
             
-            new Fragment(new Point(-5,3)),
-            new Fragment(new Point(-4,3)),
-            new Fragment(new Point(-3,3)),
-            new Fragment(new Point(3,3)),
-            new Fragment(new Point(4,3)),
-            new Fragment(new Point(5,3)),
+            new Fragment(new Point(-5,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point(-4,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point(-3,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 3,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 4,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 5,-2),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
             
-            new Fragment(new Point(-4,3)),
-
+            new Fragment(new Point(-4,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point(-3,-1),ConsoleColor.DarkGreen,ConsoleCharacter.Full),
+            new Fragment(new Point(-2,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point(-1,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 0,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 1,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 2,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 3,-1),ConsoleColor.DarkGreen,ConsoleCharacter.Full),
+            new Fragment(new Point( 4,-1),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            
+            new Fragment(new Point(-3, 0),ConsoleColor.DarkYellow,ConsoleCharacter.Medium),
+            new Fragment(new Point(-2, 0),ConsoleColor.DarkMagenta,ConsoleCharacter.Full),
+            new Fragment(new Point(-1, 0),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 1, 0),ConsoleColor.DarkYellow,ConsoleCharacter.Dark),
+            new Fragment(new Point( 2, 0),ConsoleColor.DarkMagenta,ConsoleCharacter.Full),
+            new Fragment(new Point( 3, 0),ConsoleColor.DarkYellow,ConsoleCharacter.Medium),
+            
+            new Fragment(new Point(-2, 1),ConsoleColor.DarkYellow,ConsoleCharacter.Medium),
+            new Fragment(new Point( 0, 1),ConsoleColor.DarkYellow,ConsoleCharacter.Medium),
+            new Fragment(new Point( 2, 1),ConsoleColor.DarkYellow,ConsoleCharacter.Medium),
         };
         
     }
