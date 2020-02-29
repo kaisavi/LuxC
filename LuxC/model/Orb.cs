@@ -7,8 +7,8 @@ namespace LuxC.model
     public class Orb : CollisionSprite
     {
 
-        public ConsoleColor Color { get; private set; }
-        internal void SetColor(ConsoleColor color) {
+        internal OrbColor Color { get; private set; }
+        internal void SetColor(OrbColor color) {
             this.Color = color;
             LoadSprite();
         }
@@ -26,34 +26,39 @@ namespace LuxC.model
             return 0;
         }
 
-        public Orb(ConsoleColor color, CollisionManager collisionManager) : base(collisionManager) {
+        internal Orb(OrbColor color, CollisionManager collisionManager) : base(collisionManager) {
             SetColor(color);
         }
 
         private void LoadSprite() {
             switch(Color)
             {
-                case ConsoleColor.Red:
-                    fragments = Sprites.redVertibra;
+                case OrbColor.RED:
+                    fragments = Sprites.redOrb;
                     break;
-                case ConsoleColor.Blue:
-                    fragments = Sprites.blueVertibra;
+                case OrbColor.BLUE:
+                    fragments = Sprites.blueOrb;
                     break;
-                case ConsoleColor.White:
-                    fragments = Sprites.whiteVertibra;
+                case OrbColor.WHITE:
+                    fragments = Sprites.whiteOrb;
                     break;
-                case ConsoleColor.Black:
-                    fragments = Sprites.blackVertibra;
+                case OrbColor.BLACK:
+                    fragments = Sprites.blackOrb;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException("Invalid color for orb");
             }
-        }
-
-        
-
-
-
-       
+        }    
+                            
     }
+}
+
+internal enum OrbColor {
+    //
+    // Summary:
+    //     Red Orb
+    RED = 0,
+    BLUE = 1,
+    WHITE = 2,
+    BLACK = 3
 }

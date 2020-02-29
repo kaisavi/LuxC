@@ -9,7 +9,7 @@ namespace LuxC.model
 {
     public struct Sprites
     {
-        public static readonly List<Fragment> redVertibra = new List<Fragment> {
+        public static readonly List<Fragment> redOrb = new List<Fragment> {
             new Fragment(new Point(-1,-2),ConsoleColor.Red,ConsoleCharacter.Light),
             new Fragment(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
             new Fragment(new Point(1,-2),ConsoleColor.Red,ConsoleCharacter.Light),
@@ -37,7 +37,7 @@ namespace LuxC.model
             new Fragment(new Point(1,2),ConsoleColor.Red,ConsoleCharacter.Light)
         };
 
-        public static readonly List<Fragment> blueVertibra = new List<Fragment> {
+        public static readonly List<Fragment> blueOrb = new List<Fragment> {
             new Fragment(new Point(-1,-2),ConsoleColor.Cyan,ConsoleCharacter.Medium),
             new Fragment(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
             new Fragment(new Point(1,-2),ConsoleColor.Cyan,ConsoleCharacter.Medium),
@@ -65,7 +65,7 @@ namespace LuxC.model
             new Fragment(new Point(1,2),ConsoleColor.Cyan,ConsoleCharacter.Medium)
         };
 
-        public static readonly List<Fragment> whiteVertibra = new List<Fragment> {
+        public static readonly List<Fragment> whiteOrb = new List<Fragment> {
             new Fragment(new Point(-1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
             new Fragment(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
             new Fragment(new Point(1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
@@ -93,7 +93,7 @@ namespace LuxC.model
             new Fragment(new Point(1,2),ConsoleColor.White,ConsoleCharacter.Medium)
         };
 
-        public static readonly List<Fragment> blackVertibra = new List<Fragment> {
+        public static readonly List<Fragment> blackOrb = new List<Fragment> {
             new Fragment(new Point(-1,-2),ConsoleColor.Black,ConsoleCharacter.Light),
             new Fragment(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Light),
             new Fragment(new Point(1,-2),ConsoleColor.Black,ConsoleCharacter.Light),
