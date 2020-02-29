@@ -7,31 +7,31 @@ namespace LuxC.model
     public class Orb : CollisionSprite
     {
 
-        private ConsoleColor color;
-        internal void setColor(ConsoleColor color) {
-            this.color = color;
-            loadSprite();
+        public ConsoleColor Color { get; private set; }
+        internal void SetColor(ConsoleColor color) {
+            this.Color = color;
+            LoadSprite();
         }
 
         public double Progress { get; set; } = -1;
         public OrbMode Mode { get; set; } = OrbMode.NORMAL;
 
-        public int checkNeighbors() {
+        public int CheckNeighbors() {
             //TODO: Orb nieghbor checks
             return 0;
         }
 
-        public int checkNeighbors(bool left) {
+        public int CheckNeighbors(bool left) {
             //TODO: Orb directional checks
             return 0;
         }
 
         public Orb(ConsoleColor color, CollisionManager collisionManager) : base(collisionManager) {
-            setColor(color);
+            SetColor(color);
         }
 
-        private void loadSprite() {
-            switch(color)
+        private void LoadSprite() {
+            switch(Color)
             {
                 case ConsoleColor.Red:
                     fragments = Sprites.redVertibra;
@@ -46,7 +46,7 @@ namespace LuxC.model
                     fragments = Sprites.blackVertibra;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("Invalid color for vertabrate");
+                    throw new ArgumentOutOfRangeException("Invalid color for orb");
             }
         }
 

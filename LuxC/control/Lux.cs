@@ -10,22 +10,23 @@ namespace LuxC.control
     //Console size: 240x132 
     class Lux : ConsoleGame
     {
-        CollisionManager collisionManager = new CollisionManager();
+        private CollisionManager collisionManager = new CollisionManager();
 
         Parade parade;
-        Ballista ballista = new Ballista();
+        Ballista ballista;
         Orb o;
 
         PaletteSprite palette = new PaletteSprite();
 
         float time = 0;
-        public override void Create()
-        {
+        public override void Create() {
             Drawable.setEngine(Engine);
             Engine.Borderless();
             Engine.SetBackground(8);
 
             parade = new Parade(collisionManager);
+            ballista = new Ballista(collisionManager);
+
 
             o = new Orb(ConsoleColor.White, collisionManager);
             o.Mode = OrbMode.FIRED;
@@ -36,8 +37,6 @@ namespace LuxC.control
             palette.Position = new Point(236, 128);
 
 
-
-
         }
 
         public override void Render()
@@ -46,6 +45,7 @@ namespace LuxC.control
 
             o.Draw();
             parade.Draw();
+            ballista.Draw();
 
             DrawDebug();
 
@@ -65,12 +65,12 @@ namespace LuxC.control
         public override void Update()
         {
             time += DeltaTime;
-            checkCollisions();
+            CheckCollisions();
             parade.update(DeltaTime);
+            ballista.Update();
         }
 
-        private void checkCollisions()
-        {
+        private void CheckCollisions() {
             collisionManager.updateCollisions();
         }
 
