@@ -30,7 +30,7 @@ namespace LuxC.model
         }
 
         private Orb GenerateNewOrb() {
-            return new Orb(ConsoleColor.Black,collisionManager);
+            return new Orb(OrbColor.BLACK,collisionManager);
         }
 
         public Ballista(Lux context, CollisionManager collisionManager)
@@ -40,7 +40,7 @@ namespace LuxC.model
             fragments = Sprites.ballista;
             this.collisionManager = collisionManager;
             for (int i = 0; i < 2; i++)
-                ammo[i] = new Orb(ConsoleColor.Blue, collisionManager);
+                ammo[i] = new Orb(OrbColor.BLUE, collisionManager);
             Position = new Point(120, 128);
 
             firedOrbs = new List<Orb>();

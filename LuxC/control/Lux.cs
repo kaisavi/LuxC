@@ -28,7 +28,7 @@ namespace LuxC.control
             ballista = new Ballista(this, collisionManager);
 
 
-            o = new Orb(ConsoleColor.White, collisionManager);
+            o = new Orb(OrbColor.WHITE, collisionManager);
             o.Mode = OrbMode.FIRED;
             o.Position = new Point(120, 16);
             
