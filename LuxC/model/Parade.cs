@@ -16,10 +16,13 @@ namespace LuxC.model
             new Point(-10,75),
             
             new Point(75,76),
-            new Point(125,75),
             new Point(200,75),
+            new Point(100,12),
+            new Point(125,12),
+            new Point(125,12),
+            new Point(200,12),
             
-            new Point(250,75),
+            new Point(250,12),
             
         });
         public List<Orb> Orbs { get; }
@@ -46,7 +49,8 @@ namespace LuxC.model
                     destroy(Orbs[i]);
 
                     if(Orbs.Count != 0)
-                        Orbs.Last().Mode = OrbMode.HEAD;
+                        Orbs.Last().Mode = Orbs.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD:OrbMode.TAIL;
+                                                         
 
                     break;
                 }
@@ -63,6 +67,10 @@ namespace LuxC.model
         public override void Draw() {
             DrawPath();
             DrawOrbs();
+
+            for (int i = Orbs.Count - 1; i >= 0; i--) {
+                engine.WriteText(new Point(0, Orbs.Count - i),$"{i}. {Orbs[i].Color.ToString()} {Orbs[i].Mode.ToString()}", 15);
+            }
         }
 
         private void DrawPath() {
@@ -76,34 +84,45 @@ namespace LuxC.model
         }
 
         public void insert(Orb o) {
-            if (o.Position.X > o.CollidingBodies[0].Position.X)
-                ((Orb)o.CollidingBodies[0]).SetColor(OrbColor.RED);
-            else
-                ((Orb)o.CollidingBodies[0]).SetColor(OrbColor.BLACK);
+            Orb c = (Orb)o.CollidingBodies[0];
+            insert(o, Orbs.IndexOf(c) + (o.Position.X > c.Position.X ? 1:0));
+
         }
 
+        private void insert(Orb o, int i) {
+            if(i == Orbs.Count) {
+                o.Mode = OrbMode.HEAD;
+                Orbs[i-1].Mode = OrbMode.NORMAL;
+                Orbs.Add(o);
+            }
+            else if(i == 0) {
+                o.Mode = OrbMode.TAIL;
+                Orbs[0].Mode = OrbMode.NORMAL;
+                Orbs.Insert(0, o);
+            }
+            else {
+                o.Progress = Orbs[i].Progress;
+                o.Mode = OrbMode.NORMAL;
+                Orbs.Last().Progress += i == 0 ? 0 : 7;
+                Orbs.Insert(i, o);
+            }
+            
+        }
 
         public Parade(CollisionManager collisionManager) {
             this.collisionManager = collisionManager;
             Orbs = new List<Orb> {
             new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLACK,collisionManager),
+            new Orb(OrbColor.BLACK,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager)
 
             };
+
+            Orbs.Last().Mode = OrbMode.HEAD;
+            Orbs.First().Mode = OrbMode.TAIL;
         }
 
     }

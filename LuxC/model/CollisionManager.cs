@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleGameEngine;
+using System;
 using System.Collections.Generic;
 
 namespace LuxC.model
@@ -51,7 +52,8 @@ namespace LuxC.model
         public void update() {
             a.CollidingBodies.Clear();
             for(int i = 0; i < B.Count; i++) {
-                if (Math.Abs(B[i].Position.X - a.Position.X) < 7 && Math.Abs(B[i].Position.Y - a.Position.Y) < 7 && !a.CollidingBodies.Contains(B[i])) {
+                if (Point.Distance(a.Position,B[i].Position) < 7) {  
+              //if (Math.Abs(B[i].Position.X - a.Position.X) < 7 && Math.Abs(B[i].Position.Y - a.Position.Y) < 7 && !a.CollidingBodies.Contains(B[i])) {
                     a.CollidingBodies.Add(B[i]);
                 }
             }

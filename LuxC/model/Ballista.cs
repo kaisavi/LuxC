@@ -50,16 +50,17 @@ namespace LuxC.model
         public void Update() {
             ammo[0].Position = this.Position - new Point(0, 5);
 
-
-            if (firedOrb.Position.Y > -16) {
-                firedOrb.Position += new Point(0, -3);
-            }
-            else
-                nextOrbLoaded = true;
-            if (firedOrb.CollidingBodies.Count() > 0) {
-                parade.insert(firedOrb);
-                firedOrb.Position = new Point(-16, -16);
-                nextOrbLoaded = true;
+            if (firedOrb != null) {
+                if (firedOrb.Position.Y > -16) {
+                    firedOrb.Position += new Point(0, -3);
+                }
+                else
+                    nextOrbLoaded = true;
+                if (firedOrb.CollidingBodies.Count() > 0) {
+                    parade.insert(firedOrb);
+                    firedOrb = null;
+                    nextOrbLoaded = true;
+                }
             }
 
         }
@@ -69,8 +70,11 @@ namespace LuxC.model
             if(nextOrbLoaded)
                 ammo[0].Draw();
             engine.SetPixel(Position, getHoldColor(ammo[1].Color));
-            firedOrb.Draw();
-            engine.WriteText(firedOrb.Position + new Point(5, 0), firedOrb.CollidingBodies.Count().ToString(),15);
+            if(firedOrb != null) {
+                firedOrb.Draw();
+                engine.WriteText(new Point(224, 4), firedOrb.CollidingBodies.Count().ToString(), 15);
+            }
+                
             
         }
 
