@@ -52,7 +52,7 @@ namespace LuxC.model
 
             if (firedOrb != null) {
                 if (firedOrb.Position.Y > -16) {
-                    firedOrb.Position += new Point(0, -3);
+                    firedOrb.Position += new Point(0, -5);
                 }
                 else
                     nextOrbLoaded = true;
