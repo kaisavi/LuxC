@@ -93,6 +93,7 @@ namespace LuxC.model
             if(i == Orbs.Count) {
                 o.Mode = OrbMode.HEAD;
                 Orbs[i-1].Mode = OrbMode.NORMAL;
+                o.Progress = Orbs[i - 1].Progress + 6;
                 Orbs.Add(o);
             }
             else if(i == 0) {
@@ -106,7 +107,7 @@ namespace LuxC.model
                 Orbs.Last().Progress += i == 0 ? 0 : 7;
                 Orbs.Insert(i, o);
             }
-            
+            checkForConsecutives(o);
         }
 
         public Parade(CollisionManager collisionManager) {
@@ -123,6 +124,53 @@ namespace LuxC.model
 
             Orbs.Last().Mode = OrbMode.HEAD;
             Orbs.First().Mode = OrbMode.TAIL;
+        }
+
+
+        public void checkForConsecutives(Orb o) {
+            OrbColor color = o.Color;
+            bool backSearching = true;
+            int consecutives = 1;
+            int conecutivesStart = 0;
+            int i = Orbs.IndexOf(o)-1;
+            while (backSearching) {
+                if (i < 0) {
+                    backSearching = false;
+                    break;
+                }
+                if (Orbs[i].Color.Equals(color)) {
+                    consecutives++;
+                    i--;
+                }
+                else {
+                    conecutivesStart = i + 1;
+                    backSearching = false;
+                }
+                    
+            }
+
+
+            //TODO: Current task
+            bool forwardSearching = true;
+            i = Orbs.IndexOf(o)+1;
+            
+            while (forwardSearching) {
+                if (i >= Orbs.Count()) {
+                    forwardSearching = false;
+                    break;
+                }
+                if(Orbs[i].Color.Equals(color)) {
+                    consecutives++;
+                    i++;
+                }
+                else {
+                    forwardSearching = false;
+                }
+            }
+
+            if(consecutives >= 3) {
+                Orbs.RemoveRange(conecutivesStart, consecutives); 
+            }
         }
 
     }

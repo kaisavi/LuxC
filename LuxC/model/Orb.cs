@@ -16,16 +16,6 @@ namespace LuxC.model
         public double Progress { get; set; } = -1;
         public OrbMode Mode { get; set; } = OrbMode.NORMAL;
 
-        public int CheckNeighbors() {
-            //TODO: Orb nieghbor checks
-            return 0;
-        }
-
-        public int CheckNeighbors(bool left) {
-            //TODO: Orb directional checks
-            return 0;
-        }
-
         internal Orb(OrbColor color, CollisionManager collisionManager) : base(collisionManager) {
             SetColor(color);
         }
