@@ -46,7 +46,7 @@ namespace LuxC.model
 
                 if (Orbs[i].Progress >= Path.Length - 1)
                 {
-                    destroy(Orbs[i]);
+                    DestroyAtEnd(Orbs[i]);
 
                     if(Orbs.Count != 0)
                         Orbs.Last().Mode = Orbs.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD:OrbMode.TAIL;
@@ -59,9 +59,19 @@ namespace LuxC.model
             }
         }
 
-        private void destroy(Orb rondure)
+        private void DestroyAtEnd(Orb rondure)
         {
             Orbs.Remove(rondure);
+        }
+
+        private void DestroyRange(int index, int range) {
+            if (index + range >= Orbs.Count - 1)
+                Orbs[index - 1].Mode = OrbMode.HEAD;
+            if(index == 0)
+                Orbs[index + range].Mode = OrbMode.TAIL;
+
+
+            Orbs.RemoveRange(index, range);
         }
 
         public override void Draw() {
@@ -131,7 +141,7 @@ namespace LuxC.model
             OrbColor color = o.Color;
             bool backSearching = true;
             int consecutives = 1;
-            int conecutivesStart = 0;
+            int consecutivesStart = 0;
             int i = Orbs.IndexOf(o)-1;
             while (backSearching) {
                 if (i < 0) {
@@ -143,14 +153,12 @@ namespace LuxC.model
                     i--;
                 }
                 else {
-                    conecutivesStart = i + 1;
+                    consecutivesStart = i + 1;
                     backSearching = false;
                 }
                     
             }
 
-
-            //TODO: Current task
             bool forwardSearching = true;
             i = Orbs.IndexOf(o)+1;
             
@@ -169,7 +177,7 @@ namespace LuxC.model
             }
 
             if(consecutives >= 3) {
-                Orbs.RemoveRange(conecutivesStart, consecutives); 
+                DestroyRange(consecutivesStart, consecutives);
             }
         }
 
