@@ -14,7 +14,6 @@ namespace LuxC.control
 
         public Parade Parade { get; private set; }
         Ballista ballista;
-        Orb o;
 
         PaletteSprite palette = new PaletteSprite();
 
@@ -27,13 +26,6 @@ namespace LuxC.control
             Parade = new Parade(collisionManager);
             ballista = new Ballista(Parade, collisionManager);
 
-
-            o = new Orb(OrbColor.WHITE, collisionManager);
-            o.Mode = OrbMode.FIRED;
-            o.Position = new Point(120, 16);
-            
-            collisionManager.registerForCollision(o, Parade.Orbs);
-
             palette.Position = new Point(236, 128);
 
 
@@ -43,7 +35,6 @@ namespace LuxC.control
         {
             Engine.ClearBuffer();
 
-            o.Draw();
             Parade.Draw();
             ballista.Draw();
 
