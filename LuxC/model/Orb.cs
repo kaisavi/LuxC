@@ -4,13 +4,13 @@ using ConsoleGameEngine;
 
 namespace LuxC.model
 {
-    public class Orb : CollisionSprite
-    {
-
+    public class Orb : CollisionSprite {
+        
         internal OrbColor Color { get; private set; }
         internal void SetColor(OrbColor color) {
             this.Color = color;
             LoadSprite();
+
         }
 
         public double Progress { get; set; } = -1;
@@ -21,8 +21,7 @@ namespace LuxC.model
         }
 
         private void LoadSprite() {
-            switch(Color)
-            {
+            switch (Color) {
                 case OrbColor.RED:
                     fragments = Sprites.redOrb;
                     break;
@@ -38,8 +37,19 @@ namespace LuxC.model
                 default:
                     throw new ArgumentOutOfRangeException("Invalid color for orb");
             }
-        }    
-                            
+        }
+
+
+        public void registerCollision(List<Orb> orbs) {
+            if(Mode.Equals(OrbMode.FIRED))
+                collisionManager.registerCollisions(this, orbs);
+            if (Mode.Equals(OrbMode.HEAD))
+                collisionManager.registerCollisions(this, orbs.FindAll((Orb o) => o.Mode.Equals(OrbMode.STRAY)));
+        }
+
+        public void unregisterCollision() {
+            collisionManager.unregisterCollisions(this);
+        }
     }
 }
 

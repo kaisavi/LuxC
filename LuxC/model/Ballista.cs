@@ -13,7 +13,6 @@ namespace LuxC.model
     {
         Orb[] ammo = new Orb[2];
         Orb firedOrb;
-        private readonly CollisionManager collisionManager;
         Parade parade;
         private bool nextOrbLoaded = true;
 
@@ -25,14 +24,15 @@ namespace LuxC.model
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
 
-                collisionManager.registerCollisions(firedOrb, parade.Orbs);
+                firedOrb.registerCollision(parade.Orbs);
+
                                 
             }
 
         }
 
         private Orb GenerateNewOrb() {
-            return new Orb(OrbColor.BLACK,collisionManager);
+            return new Orb(OrbColor.BLACK,Lux.collisionManager);
         }
 
         public Ballista(Parade parade, CollisionManager collisionManager)
@@ -40,7 +40,6 @@ namespace LuxC.model
             this.parade = parade;
 
             fragments = Sprites.ballista;
-            this.collisionManager = collisionManager;
             for (int i = 0; i < 2; i++)
                 ammo[i] = new Orb(OrbColor.BLUE, collisionManager);
             firedOrb = new Orb(OrbColor.RED, collisionManager);

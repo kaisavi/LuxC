@@ -40,7 +40,7 @@ namespace LuxC.model
             if (!Orbs.Exists((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }))
                 Orbs.Last().Progress += speed * deltaTime;
             else {
-                Orbs[Orbs.IndexOf(Orbs.Where((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }).First()) - 1].SetColor(OrbColor.WHITE);
+                Orbs[Orbs.IndexOf(Orbs.Where((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }).First()) - 1].ToString();
             }
 
             for (int i = Orbs.Count - 1; i >= 0; i--)

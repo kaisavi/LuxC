@@ -8,7 +8,7 @@ namespace LuxC.model
 {
     public abstract class CollisionSprite : Sprite
     {
-        private readonly CollisionManager collisionManager;
+        protected readonly CollisionManager collisionManager;
 
         public List<CollisionSprite> CollidingBodies { get; set; } = new List<CollisionSprite>();
 
@@ -16,6 +16,8 @@ namespace LuxC.model
         {
             this.collisionManager = collisionManager;
         }
+
+
 
   
     }
