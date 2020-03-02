@@ -7,7 +7,7 @@ namespace LuxC.model
     public class CollisionManager
     {
         private List<Collision> collisions = new List<Collision>();
-        public void registerForCollision(Orb a,List<Orb> B) {
+        public void registerCollisions(Orb a,List<Orb> B) {
             
                 switch(a.Mode) {
                     case OrbMode.FIRED:
@@ -19,6 +19,9 @@ namespace LuxC.model
                 }
             }
 
+        public void unregisterCollisions(Orb a) {
+            collisions.RemoveAll((Collision c) => { return c.a.Equals(a); });
+        }
 
         public void updateCollisions() {
             foreach(Collision c in collisions) {
@@ -41,7 +44,7 @@ namespace LuxC.model
 
     internal class Collision {
 
-        private Orb a;
+        public readonly Orb a;
         private List<Orb> B;
 
         public Collision(Orb a, List<Orb> B) {
