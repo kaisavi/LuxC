@@ -10,7 +10,7 @@ namespace LuxC.control
     //Console size: 240x132 
     class Lux : ConsoleGame
     {
-        private CollisionManager collisionManager = new CollisionManager();
+        public static readonly CollisionManager collisionManager = new CollisionManager();
 
         public Parade Parade { get; private set; }
         Ballista ballista;
