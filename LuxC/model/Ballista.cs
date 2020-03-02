@@ -25,7 +25,7 @@ namespace LuxC.model
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
 
-                collisionManager.registerForCollision(firedOrb, parade.Orbs);
+                collisionManager.registerCollisions(firedOrb, parade.Orbs);
                                 
             }
 
