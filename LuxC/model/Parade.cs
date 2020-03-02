@@ -36,8 +36,12 @@ namespace LuxC.model
 
 
         private void advance(float deltaTime) {
-            
-            Orbs.Last().Progress += speed * deltaTime;
+
+            if (!Orbs.Exists((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }))
+                Orbs.Last().Progress += speed * deltaTime;
+            else {
+                Orbs[Orbs.IndexOf(Orbs.Where((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }).First()) - 1].SetColor(OrbColor.WHITE);
+            }
 
             for (int i = Orbs.Count - 1; i >= 0; i--)
             {
@@ -65,13 +69,17 @@ namespace LuxC.model
         }
 
         private void DestroyRange(int index, int range) {
+            //TODO: Orb progress preservation
             if (index + range >= Orbs.Count - 1)
                 Orbs[index - 1].Mode = OrbMode.HEAD;
-            if(index == 0)
+            else if(index == 0)
                 Orbs[index + range].Mode = OrbMode.TAIL;
-
+            else {
+                Orbs[index + range].Mode = OrbMode.STRAY;
+            }
 
             Orbs.RemoveRange(index, range);
+            //TODO: Recursive Destruction
         }
 
         public override void Draw() {
@@ -124,6 +132,10 @@ namespace LuxC.model
             this.collisionManager = collisionManager;
             Orbs = new List<Orb> {
             new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLUE,collisionManager),
+            new Orb(OrbColor.BLACK,collisionManager),
+            new Orb(OrbColor.BLACK,collisionManager),
             new Orb(OrbColor.BLACK,collisionManager),
             new Orb(OrbColor.BLACK,collisionManager),
             new Orb(OrbColor.BLUE,collisionManager),
@@ -131,7 +143,8 @@ namespace LuxC.model
             new Orb(OrbColor.BLUE,collisionManager)
 
             };
-
+           // Orbs.Last().Progress = 60;
+            //Orbs[4].Mode = OrbMode.STRAY;
             Orbs.Last().Mode = OrbMode.HEAD;
             Orbs.First().Mode = OrbMode.TAIL;
         }
