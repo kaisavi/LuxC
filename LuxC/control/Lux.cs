@@ -57,15 +57,15 @@ namespace LuxC.control
             time += DeltaTime;
 
             if (Engine.GetKey(ConsoleKey.LeftArrow))
-                ballista.Move(-1);
+                ballista.Move(-48,DeltaTime);
             if (Engine.GetKey(ConsoleKey.RightArrow))
-                ballista.Move(1);
+                ballista.Move(48,DeltaTime);
             if (Engine.GetKey(ConsoleKey.Spacebar))
                 ballista.Fire();
 
             CheckCollisions();
             Parade.update(DeltaTime);
-            ballista.Update();
+            ballista.Update(DeltaTime);
         }
 
         private void CheckCollisions() {

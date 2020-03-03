@@ -16,10 +16,14 @@ namespace LuxC.model
         Parade parade;
         private bool nextOrbLoaded = true;
 
+        float xPos = 120;
+        float orbPos;
+
         public void Fire() {
             if(nextOrbLoaded) {
                 nextOrbLoaded = false;
                 firedOrb = ammo[0];
+                orbPos = firedOrb.Position.Y;
                 firedOrb.Mode = OrbMode.FIRED;
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
@@ -45,12 +49,12 @@ namespace LuxC.model
             Position = new Point(120, 128);
         }
 
-        public void Update() {
+        public void Update(float deltaTime) {
             ammo[0].Position = this.Position - new Point(0, 5);
-
+            orbPos -= 256f * deltaTime;
             if (firedOrb != null) {
                 if (firedOrb.Position.Y > -16) {
-                    firedOrb.Position += new Point(0, -5);
+                    firedOrb.Position = new Point(firedOrb.Position.X, (int)orbPos);
                 }
                 else
                     nextOrbLoaded = true;
@@ -76,9 +80,11 @@ namespace LuxC.model
             
         }
 
-        internal void Move(int v) {
-            if ( (Position.X > 7 && Math.Sign(v) == -1) || (Position.X < 233 && Math.Sign(v) == 1) )
-                Position += new Point(v, 0);          
+        internal void Move(int v, float deltaTime) {
+
+            if ((Position.X > 7 && Math.Sign(v) == -1) || (Position.X < 233 && Math.Sign(v) == 1))
+                xPos += v * deltaTime;
+            Position = new Point((int)xPos, Position.Y);          
         }
 
         private int getHoldColor(OrbColor color) {
