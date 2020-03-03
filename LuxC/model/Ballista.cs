@@ -26,13 +26,12 @@ namespace LuxC.model
 
                 firedOrb.registerCollision(parade.Orbs);
 
-                                
             }
 
         }
 
         private Orb GenerateNewOrb() {
-            return new Orb(OrbColor.BLACK);
+            return new Orb((OrbColor)new Random().Next(0,4));
         }
 
         public Ballista(Parade parade)
