@@ -1,3 +1,4 @@
 # LuxC
-A console game based on Luxor
-This project is a work in progress and currently has no content which can be considered riveting.
+A console game based on Luxor.
+
+Currently there is only a simple development and debugging demo. Most features are not fully implemented.
