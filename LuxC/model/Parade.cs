@@ -26,6 +26,7 @@ namespace LuxC.model
         public List<Orb> Orbs { get; }
 
         private int speed = 12;
+        private int activeHead;
 
         public void update(float deltaTime) {
             if(Orbs.Count > 0)
@@ -35,16 +36,12 @@ namespace LuxC.model
 
         private void advance(float deltaTime) {
 
-            if (!Orbs.Exists((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }))
-                Orbs.Last().Progress += speed * deltaTime;
-            else {
-                Orbs[Orbs.IndexOf(Orbs.Where((Orb o) => { return o.Mode.Equals(OrbMode.STRAY); }).First()) - 1].ToString();
-            }
+            Orbs[activeHead].Progress += speed * deltaTime;
 
-            for (int i = Orbs.Count - 1; i >= 0; i--)
+            for (int i = activeHead; i >= 0; i--)
             {
-                if(i != Orbs.Count - 1)
-                    Orbs[i].Progress = Orbs.Last().Progress - (7 * ((Orbs.Count - 1) - i));
+                if(i != activeHead)
+                    Orbs[i].Progress = Orbs[activeHead].Progress - (7 * ((activeHead) - i));
 
                 if (Orbs[i].Progress >= Path.Length - 1)
                 {
@@ -67,15 +64,16 @@ namespace LuxC.model
         }
 
         private void DestroyRange(int index, int range) {
-            //TODO: Orb progress preservation
             if (index + range >= Orbs.Count - 1)
                 Orbs[index - 1].Mode = OrbMode.HEAD;
             else if(index == 0)
                 Orbs[index + range].Mode = OrbMode.TAIL;
             else {
                 Orbs[index + range].Mode = OrbMode.STRAY;
+                Orbs[index - 1].Mode = OrbMode.HEAD;
+                Orbs[index - 1].registerCollision(Orbs);
             }
-
+            activeHead = index - 1;
             Orbs.RemoveRange(index, range);
             //TODO: Recursive Destruction
         }
@@ -143,7 +141,9 @@ namespace LuxC.model
            // Orbs.Last().Progress = 60;
             //Orbs[4].Mode = OrbMode.STRAY;
             Orbs.Last().Mode = OrbMode.HEAD;
+            activeHead = Orbs.Count -1;
             Orbs.First().Mode = OrbMode.TAIL;
+
         }
 
 
