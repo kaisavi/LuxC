@@ -9,8 +9,6 @@ namespace LuxC.model
 {
     //Console size: 240x132
     class Parade : Drawable {
-
-        private CollisionManager collisionManager;
         public Path Path { get; } = new Path(new List<Point> {
             
             new Point(-10,75),
@@ -128,19 +126,18 @@ namespace LuxC.model
             checkForConsecutives(o);
         }
 
-        public Parade(CollisionManager collisionManager) {
-            this.collisionManager = collisionManager;
+        public Parade() {
             Orbs = new List<Orb> {
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLACK,collisionManager),
-            new Orb(OrbColor.BLACK,collisionManager),
-            new Orb(OrbColor.BLACK,collisionManager),
-            new Orb(OrbColor.BLACK,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager),
-            new Orb(OrbColor.BLUE,collisionManager)
+            new Orb(OrbColor.BLUE),
+            new Orb(OrbColor.BLUE),
+            new Orb(OrbColor.BLUE),
+            new Orb(OrbColor.BLACK),
+            new Orb(OrbColor.BLACK),
+            new Orb(OrbColor.BLACK),
+            new Orb(OrbColor.BLACK),
+            new Orb(OrbColor.BLUE),
+            new Orb(OrbColor.BLUE),
+            new Orb(OrbColor.BLUE)
 
             };
            // Orbs.Last().Progress = 60;

@@ -10,7 +10,6 @@ namespace LuxC.control
     //Console size: 240x132 
     class Lux : ConsoleGame
     {
-        public static readonly CollisionManager collisionManager = new CollisionManager();
 
         public Parade Parade { get; private set; }
         Ballista ballista;
@@ -20,11 +19,12 @@ namespace LuxC.control
         float time = 0;
         public override void Create() {
             Drawable.setEngine(Engine);
+            CollisionSprite.Init(new CollisionManager());
             Engine.Borderless();
             Engine.SetBackground(8);
 
-            Parade = new Parade(collisionManager);
-            ballista = new Ballista(Parade, collisionManager);
+            Parade = new Parade();
+            ballista = new Ballista(Parade);
 
             palette.Position = new Point(236, 128);
 
@@ -69,7 +69,7 @@ namespace LuxC.control
         }
 
         private void CheckCollisions() {
-            collisionManager.updateCollisions();
+            CollisionSprite.collisionManager.updateCollisions();
         }
 
 

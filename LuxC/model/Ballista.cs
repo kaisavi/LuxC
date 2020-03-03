@@ -32,17 +32,17 @@ namespace LuxC.model
         }
 
         private Orb GenerateNewOrb() {
-            return new Orb(OrbColor.BLACK,Lux.collisionManager);
+            return new Orb(OrbColor.BLACK);
         }
 
-        public Ballista(Parade parade, CollisionManager collisionManager)
+        public Ballista(Parade parade)
         {
             this.parade = parade;
 
             fragments = Sprites.ballista;
             for (int i = 0; i < 2; i++)
-                ammo[i] = new Orb(OrbColor.BLUE, collisionManager);
-            firedOrb = new Orb(OrbColor.RED, collisionManager);
+                ammo[i] = new Orb(OrbColor.BLUE);
+            firedOrb = new Orb(OrbColor.RED);
             Position = new Point(120, 128);
         }
 

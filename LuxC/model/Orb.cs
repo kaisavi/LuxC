@@ -16,7 +16,7 @@ namespace LuxC.model
         public double Progress { get; set; } = -1;
         public OrbMode Mode { get; set; } = OrbMode.NORMAL;
 
-        internal Orb(OrbColor color, CollisionManager collisionManager) : base(collisionManager) {
+        internal Orb(OrbColor color){
             SetColor(color);
         }
 
