@@ -29,10 +29,15 @@ namespace LuxC.model
         private int activeHead;
 
         public void update(float deltaTime) {
+            checkForHeadCollision();
+
             if(Orbs.Count > 0)
                 advance(deltaTime);
         }
 
+        private void checkForHeadCollision() {
+            
+        }
 
         private void advance(float deltaTime) {
 
@@ -60,20 +65,27 @@ namespace LuxC.model
 
         private void DestroyAtEnd(Orb rondure)
         {
+            if (activeHead == Orbs.Count - 1) {
+                activeHead--;
+            }
             Orbs.Remove(rondure);
+             
         }
 
         private void DestroyRange(int index, int range) {
             if (index + range >= Orbs.Count - 1)
                 Orbs[index - 1].Mode = OrbMode.HEAD;
-            else if(index == 0)
+            else if (index == 0) {
                 Orbs[index + range].Mode = OrbMode.TAIL;
+
+            }
             else {
                 Orbs[index + range].Mode = OrbMode.STRAY;
                 Orbs[index - 1].Mode = OrbMode.HEAD;
                 Orbs[index - 1].registerCollision(Orbs);
+                
             }
-            activeHead = index - 1;
+            activeHead = index == 0 ? Orbs.Count - range - 1    : index - 1;
             Orbs.RemoveRange(index, range);
             //TODO: Recursive Destruction
         }
@@ -121,6 +133,7 @@ namespace LuxC.model
                 Orbs.Last().Progress += i == 0 ? 0 : 7;
                 Orbs.Insert(i, o);
             }
+            activeHead++;
             checkForConsecutives(o);
         }
 
