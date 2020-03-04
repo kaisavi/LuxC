@@ -20,6 +20,7 @@ namespace LuxC.model
             }
 
         public void unregisterCollisions(Orb a) {
+            a.CollidingBodies.Clear();
             collisions.RemoveAll((Collision c) => { return c.a.Equals(a); });
         }
 
