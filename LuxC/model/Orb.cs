@@ -6,6 +6,8 @@ namespace LuxC.model
 {
     public class Orb : CollisionSprite {
         
+
+
         internal OrbColor Color { get; private set; }
         internal void SetColor(OrbColor color) {
             this.Color = color;
@@ -18,6 +20,10 @@ namespace LuxC.model
 
         internal Orb(OrbColor color){
             SetColor(color);
+        }
+
+        public bool isHead() {
+            return this.Mode.Equals(OrbMode.HEAD);
         }
 
         private void LoadSprite() {
@@ -51,6 +57,8 @@ namespace LuxC.model
             collisionManager.unregisterCollisions(this);
         }
     }
+
+   
 }
 
 
