@@ -37,8 +37,12 @@ namespace LuxC.model
         }
 
         private void checkForHeadCollision() {
+            //TODO: fix bug where parade jumps forward on recombination 
+
             if(Orbs[activeHead].CollidingBodies.Count > 0) {
                 Orbs[activeHead].Mode = OrbMode.NORMAL;
+                Orbs[activeHead].unregisterCollision();
+                Orbs[activeHead + 1].Mode = OrbMode.NORMAL;
                 activeHead = Orbs.FindIndex((Orb o) => { return o.isHead(); });
             }
                 
@@ -98,7 +102,7 @@ namespace LuxC.model
                 Orbs.RemoveRange(index, range);
                 activeHead = Orbs.FindIndex((Orb o) => { return o.isHead(); });
             }
-            //TODO: Recursive Destruction
+            //TODO: Recursive Destruction 
         }
 
         public override void Draw() {
@@ -107,7 +111,7 @@ namespace LuxC.model
 
             for (int i = Orbs.Count - 1; i >= 0; i--) {
                 engine.WriteText(new Point(0, Orbs.Count - i),
-                    $"{i}. {Orbs[i].Color.ToString()} {Orbs[i].Mode.ToString()}",
+                    $"{i}. {Orbs[i].Color.ToString()} {Orbs[i].Mode.ToString()} + {Orbs[i].Progress}",
                     i == activeHead ? 7 : 15
                     ) ;
             }
