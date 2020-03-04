@@ -59,6 +59,7 @@ namespace LuxC.model
                 else
                     nextOrbLoaded = true;
                 if (firedOrb.CollidingBodies.Count() > 0) {
+                    firedOrb.unregisterCollision();
                     parade.insert(firedOrb);
                     firedOrb = null;
                     nextOrbLoaded = true;
