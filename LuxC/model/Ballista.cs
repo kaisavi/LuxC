@@ -55,7 +55,7 @@ namespace LuxC.model
 
         public void Update(float deltaTime) {
             ammo[0].Position = this.Position - new Point(0, 5);
-            orbPos -= 256f * deltaTime;
+            orbPos -= 300f * deltaTime;
             if (firedOrb != null) {
                 if (firedOrb.Position.Y > -16) {
                     firedOrb.Position = new Point(firedOrb.Position.X, (int)orbPos);

@@ -77,6 +77,7 @@
     <Compile Include="model\PaletteSprite.cs" />
     <Compile Include="model\CollisionSprite.cs" />
     <Compile Include="model\OrbMode.cs" />
+    <Compile Include="model\Paths.cs" />
     <Compile Include="model\Sprites.cs" />
     <Compile Include="model\Path.cs" />
     <Compile Include="model\Fragment.cs" />
