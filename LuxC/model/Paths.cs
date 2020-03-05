@@ -17,6 +17,6 @@ namespace LuxC.model {
         }).Append(new Path(new List<Point> {
             new Point(64,75),
             new Point(75,75)
-        }));
+        })).Cull();
     }
 }

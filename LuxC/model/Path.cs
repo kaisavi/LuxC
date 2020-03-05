@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using ConsoleGameEngine;
+using System.Linq;
 namespace LuxC.model
 {
     public class Path : Drawable
     {
 
-        public List<Point> Points { get; }
+        public List<Point> Points { get; private set; }
 
         public int Length { get => Points.Count; }
 
@@ -16,6 +17,11 @@ namespace LuxC.model
 
         public Path Append(Path p) {
             this.Points.AddRange(p.Points);
+            return this;
+        }
+
+        public Path Cull() {
+            Points = Points.Distinct().ToList();
             return this;
         }
 
