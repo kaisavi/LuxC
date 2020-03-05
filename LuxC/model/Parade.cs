@@ -118,7 +118,8 @@ namespace LuxC.model
 
             for (int i = sections.Count - 1; i >= 0; i--) {
                 for(int j = sections[i].Count - 1; j >= 0; j--) {
-                    engine.WriteText(new Point(0, sections.Count - i),
+
+                    engine.WriteText(new Point(15 * i, sections[i].Count - j),
                     $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()} + {sections[i][j].Progress}",
                     i == activeHead ? 7 : 15);
 
@@ -148,17 +149,7 @@ namespace LuxC.model
         }
 
         private void insert(int section, Orb o, int i) {
-            // = Active head + 1: Determine if it is closer to the stray, or the head;
-                // Insert after head, reassign head 
-                // Insert before stray, reassign stray 
-            // = Stray: Insert after stray, push next head 
-            // > Stray: insert, push next head 
-            // = Next head 
 
-            //else { //insert somewhere before the active head 
-            //if(i == activeHead + 1) {
-            //    Console.WriteLine();
-            //}
                 if (i == sections[section].Count ) { //Insert after head, and reassign head 
                     o.Mode = OrbMode.HEAD;
                     sections[section][i - 1].Mode = OrbMode.NORMAL;
@@ -176,7 +167,7 @@ namespace LuxC.model
                     sections[section].Last().Progress += i == 0 ? 0 : 7;
                     sections[section].Insert(i, o);
                 }
-            //}
+
             checkForConsecutives(section,o);
         }
 
@@ -230,7 +221,7 @@ namespace LuxC.model
             i = sections[section].IndexOf(o)+1;
             
             while (forwardSearching) {
-                if (i >= sections.Count()) {
+                if (i >= sections[section].Count()) {
                     forwardSearching = false;
                     break;
                 }
