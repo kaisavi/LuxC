@@ -14,6 +14,10 @@ namespace LuxC.model
             Points = new BezierCurve().Bezier2D(controlPoints);
         }
 
+        public Path Append(Path p) {
+            this.Points.AddRange(p.Points);
+            return this;
+        }
 
         public override void Draw()
         {                                      
