@@ -9,24 +9,10 @@ namespace LuxC.model
 {
     //Console size: 240x132
     class Parade : Drawable {
-        public Path Path { get; set; } = new Path(new List<Point> {
-            
-            new Point(-10,75),
-            
-            new Point(75,76),
-            new Point(200,75),
-            new Point(100,12),
-            new Point(125,12),
-            new Point(125,12),
-            new Point(200,12),
-            
-            new Point(250,12),
-            
-        });
+        public Path Path { get; set; } = Paths.demo;
         public List<List<Orb>> sections { get; private set; }
 
         private int speed = 12;
-        private int activeHead;
 
         public void update(float deltaTime) {
 
@@ -124,17 +110,17 @@ namespace LuxC.model
         public override void Draw() {
             DrawPath();
             DrawOrbs();
+            DrawDebug();
+        }
 
+        private void DrawDebug() {
             for (int i = sections.Count - 1; i >= 0; i--) {
-                for(int j = sections[i].Count - 1; j >= 0; j--) {
+                for (int j = sections[i].Count - 1; j >= 0; j--) {
 
-                    engine.WriteText(new Point(24 * i, sections[i].Count - j),
+                    engine.WriteText(new Point(26 * i, sections[i].Count - j),
                     $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()} + {sections[i][j].Progress}",
-                    i == activeHead ? 7 : 15);
-
-
+                    15);
                 }
-                    
             }
         }
 
