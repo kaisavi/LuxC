@@ -24,7 +24,6 @@ namespace LuxC.model
             
         });
         public List<List<Orb>> sections { get; private set; }
-        private List<Orb> consalidatedSections;
 
         private int speed = 12;
         private int activeHead;
@@ -39,7 +38,7 @@ namespace LuxC.model
 
         private void checkForHeadCollision() {
             for(int i = 0; i < sections.Count - 1; i++) {
-                if(sections[i].Last().Progress <= sections[i + 1].First().Progress) {
+                if(sections[i].Last().Progress >= sections[i + 1].First().Progress - 6) {
                     sections[i].Last().Mode.Equals(OrbMode.NORMAL);
                     sections[i].AddRange(sections[i + 1]);
                     sections.Remove(sections[i + 1]);
@@ -52,29 +51,28 @@ namespace LuxC.model
 
             for (int i = 0; i < sections.Count; i++) {
                 List<Orb> section = sections[i];
-                if(section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); }))) {
+                for (int j = section.Count - 1; j >= 0; j--) {
+                    if (j != section.Count - 1)
+                        section[j].Progress = section.Last().Progress - (7 * ((section.Count - 1) - j));
 
-                    for (int j = section.Count - 1; j >= 0; j--) {
-                        if (j != section.Count - 1)
-                            section[j].Progress = section.Last().Progress - (7 * ((section.Count - 1) - j));
+                    if (section[j].Progress >= Path.Length - 1) {
+                        Pop();
 
-                        if (section[j].Progress >= Path.Length - 1) {
-                            Pop();
+                        if (section.Count != 0)
+                            section.Last().Mode = section.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD : OrbMode.TAIL;
+                        else
+                            sections.Remove(sections.Last());
 
-                            if (section.Count != 0)
-                                section.Last().Mode = section.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD : OrbMode.TAIL;
-                            else
-                                sections.Remove(sections.Last());
-
-                            break;
-                        }
-                        
-                        section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
+                        break;
                     }
 
-                    if (section.Count > 0)
+                    section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
+                }
+
+                if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
                         section.Last().Progress += speed * deltaTime;
                 }
+                
             }
 
 
@@ -90,24 +88,35 @@ namespace LuxC.model
         private void DestroyRange(int section, int index, int range) {
             
 
-            if(index == 0 && range == sections[section].Count) {
+            if(index == 0 && range == sections[section].Count) { //destroy all orbs in a section 
                 sections[section].Clear();
+                sections.RemoveAt(section);
             }
             else {
 
-                if (index + range >= sections[section].Count - 1)
+                if (index + range >= sections[section].Count - 1) { // destroy leading orbs and reassign head 
                     sections[section][index - 1].Mode = OrbMode.HEAD;
-                else if (index == 0) {
+                    
+                }
+                else if (index == 0) { // destroy tailing orbs and reassign tail 
                     sections[section][index + range].Mode = OrbMode.TAIL;
 
                 }
-                else {
-                    sections[section][index + range].Mode = OrbMode.STRAY;
+                else { // destroy some orbs and assign new head 
                     sections[section][index - 1].Mode = OrbMode.HEAD;
-                    sections[section][index - 1].registerCollision(sections[section]);
 
                 }
-                sections[section].RemoveRange(index, range);
+                double newProgress = sections[section][index].Progress; //Where to locate the section of orbs after destruction 
+                //Split into two sections
+                sections.Insert(section+1,sections[section].Skip(range+index).ToList());
+                sections[section] = sections[section].Take(index).ToList();
+                if (sections[section].Count == 0) {
+                    sections.RemoveAt(section);
+                    return;
+                }
+                if (sections[section + 1].Count == 0)
+                    sections.RemoveAt(section+1);
+                sections[section].Last().Progress = newProgress;
             }
             //TODO: Recursive Destruction 
         }
@@ -119,7 +128,7 @@ namespace LuxC.model
             for (int i = sections.Count - 1; i >= 0; i--) {
                 for(int j = sections[i].Count - 1; j >= 0; j--) {
 
-                    engine.WriteText(new Point(15 * i, sections[i].Count - j),
+                    engine.WriteText(new Point(24 * i, sections[i].Count - j),
                     $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()} + {sections[i][j].Progress}",
                     i == activeHead ? 7 : 15);
 
@@ -164,7 +173,7 @@ namespace LuxC.model
                 else { //Insert somewhere and push head forward 
                     o.Progress = sections[section][i].Progress;
                     o.Mode = OrbMode.NORMAL;
-                    sections[section].Last().Progress += i == 0 ? 0 : 7;
+                    sections[section].Last().Progress += i == 0 ? 0 : 14;
                     sections[section].Insert(i, o);
                 }
 
