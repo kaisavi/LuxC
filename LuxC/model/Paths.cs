@@ -11,12 +11,12 @@ namespace LuxC.model {
 
             new Point(-10,32),
 
-            new Point(32,64),
-            new Point(64,75),
+            new Point(100,32),
 
         }).Append(new Path(new List<Point> {
-            new Point(64,75),
-            new Point(75,75)
+            new Point(100,32),
+            new Point(32,75),
+            new Point(-10,75),
         })).Cull();
     }
 }

@@ -137,10 +137,28 @@ namespace LuxC.model
 
         public void insert(Orb o) {
             int section;
+           
             Orb c = (Orb)o.CollidingBodies[0];
-            section = sections.FindIndex((List<Orb> s) => { return s.Contains(c); });
+            section = sections.FindIndex((List<Orb> s) => { return s.Contains(c); }); 
+            int index = sections[section].IndexOf(c);
             o.unregisterCollision();
-            insert(section, o, sections[section].IndexOf(c) + (o.Position.X > c.Position.X ? 1:0));
+            if(index == 0) {
+                if(sections[section][index + 1].Position.X > sections[section][index].Position.X)
+                    insert(section, o, sections[section].IndexOf(c) +
+                ((o.Position.X > c.Position.X) ? 1 : 0));
+                else
+                    insert(section, o, sections[section].IndexOf(c) +
+                ((o.Position.X < c.Position.X) ? 1 : 0));
+            }
+            else {
+                if(sections[section][index - 1].Position.X > sections[section][index].Position.X)
+                    insert(section, o, sections[section].IndexOf(c) +
+                ((o.Position.X < c.Position.X) ? 1 : 0));
+                else
+                    insert(section, o, sections[section].IndexOf(c) +
+                ((o.Position.X > c.Position.X) ? 1 : 0));
+            }
+            
         }
 
         private void insert(int section, Orb o, int i) {
