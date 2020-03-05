@@ -17,6 +17,8 @@ namespace LuxC.control
         PaletteSprite palette = new PaletteSprite();
 
         float time = 0;
+        private Point cursorPos = new Point(0,0);
+
         public override void Create() {
             Drawable.setEngine(Engine);
             CollisionSprite.Init(new CollisionManager());
@@ -49,6 +51,9 @@ namespace LuxC.control
             Engine.WriteText(new Point(224, 0), GetFramerate().ToString(), 0,15);
             Engine.WriteText(new Point(224, 1), time.ToString(), 0,15);
             Engine.WriteText(new Point(224, 2), DeltaTime.ToString(), 0,15);
+
+            Engine.SetPixel(cursorPos, (int)ConsoleColor.Green);
+            Engine.WriteText(new Point(224, 4), cursorPos.ToString(),15);
            
         }
 
@@ -62,6 +67,15 @@ namespace LuxC.control
                 ballista.Move(48,DeltaTime);
             if (Engine.GetKey(ConsoleKey.Spacebar))
                 ballista.Fire();
+
+            if (Engine.GetKey(ConsoleKey.K))
+                cursorPos.Y++;
+            if (Engine.GetKey(ConsoleKey.I))
+                cursorPos.Y--;
+            if (Engine.GetKey(ConsoleKey.J))
+                cursorPos.X--;
+            if (Engine.GetKey(ConsoleKey.L))
+                cursorPos.X++;
 
             CheckCollisions();
             Parade.update(DeltaTime);
