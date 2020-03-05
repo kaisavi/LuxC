@@ -51,8 +51,9 @@ namespace LuxC.model
 
                         break;
                     }
-
+                    int prevPos = section[j].Position.X;
                     section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
+                    section[j].directionOfTravel = section[j].Position.X > prevPos ? 1 : -1;
                 }
 
                 if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
@@ -142,23 +143,14 @@ namespace LuxC.model
             section = sections.FindIndex((List<Orb> s) => { return s.Contains(c); }); 
             int index = sections[section].IndexOf(c);
             o.unregisterCollision();
-            if(index == 0) {
-                if(sections[section][index + 1].Position.X > sections[section][index].Position.X && sections[section].Count > 1)
-                    insert(section, o, sections[section].IndexOf(c) +
-                ((o.Position.X > c.Position.X) ? 1 : 0));
-                else
-                    insert(section, o, sections[section].IndexOf(c) +
-                ((o.Position.X < c.Position.X) ? 1 : 0));
-            }
-            else {
-                if(sections[section][index - 1].Position.X > sections[section][index].Position.X)
-                    insert(section, o, sections[section].IndexOf(c) +
-                ((o.Position.X < c.Position.X) ? 1 : 0));
-                else
-                    insert(section, o, sections[section].IndexOf(c) +
-                ((o.Position.X > c.Position.X) ? 1 : 0));
-            }
-            
+
+            if (sections[section][index].directionOfTravel == 1)
+                insert(section, o, sections[section].IndexOf(c) +
+            ((o.Position.X > c.Position.X) ? 1 : 0));
+            else
+                insert(section, o, sections[section].IndexOf(c) +
+            ((o.Position.X < c.Position.X) ? 1 : 0));
+
         }
 
         private void insert(int section, Orb o, int i) {
@@ -170,14 +162,17 @@ namespace LuxC.model
                     sections[section].Add(o);
                 }
                 else if (i == 0) { // insert at tail 
+                    if(sections[section][0].Mode.Equals(OrbMode.TAIL)) {
                     o.Mode = OrbMode.TAIL;
                     sections[section][0].Mode = OrbMode.NORMAL;
+                }
+                        
                     sections[section].Insert(0, o);
                 }
                 else { //Insert somewhere and push head forward 
                     o.Progress = sections[section][i].Progress;
                     o.Mode = OrbMode.NORMAL;
-                    sections[section].Last().Progress += i == 0 ? 0 : 14;
+                    sections[section].Last().Progress += i == 0 ? 0 : 7;
                     sections[section].Insert(i, o);
                 }
 
