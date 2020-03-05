@@ -5,7 +5,7 @@ using ConsoleGameEngine;
 namespace LuxC.model
 {
     public class Orb : CollisionSprite {
-        
+        public int directionOfTravel;
 
 
         internal OrbColor Color { get; private set; }
