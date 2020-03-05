@@ -9,7 +9,7 @@ namespace LuxC.model
 {
     //Console size: 240x132
     class Parade : Drawable {
-        public Path Path { get; } = new Path(new List<Point> {
+        public Path Path { get; set; } = new Path(new List<Point> {
             
             new Point(-10,75),
             
@@ -23,84 +23,91 @@ namespace LuxC.model
             new Point(250,12),
             
         });
-        public List<Orb> Orbs { get; }
+        public List<List<Orb>> sections { get; private set; }
+        private List<Orb> consalidatedSections;
 
         private int speed = 12;
         private int activeHead;
 
         public void update(float deltaTime) {
 
-            if (Orbs.Count > 0) {
+            if (sections.Count > 0) {
                 checkForHeadCollision();
                 advance(deltaTime);
             }
         }
 
         private void checkForHeadCollision() {
-            //TODO: fix bug where parade jumps forward on recombination 
-
-            if(Orbs[activeHead].CollidingBodies.Count > 0) {
-                Orbs[activeHead].Mode = OrbMode.NORMAL;
-                Orbs[activeHead].unregisterCollision();
-                Orbs[activeHead + 1].Mode = OrbMode.NORMAL;
-                activeHead = Orbs.FindIndex((Orb o) => { return o.isHead(); });
+            for(int i = 0; i < sections.Count - 1; i++) {
+                if(sections[i].Last().Progress <= sections[i + 1].First().Progress) {
+                    sections[i].Last().Mode.Equals(OrbMode.NORMAL);
+                    sections[i].AddRange(sections[i + 1]);
+                    sections.Remove(sections[i + 1]);
+                }
             }
                 
         }
 
         private void advance(float deltaTime) {
 
-            Orbs[activeHead].Progress += speed * deltaTime;
+            for (int i = 0; i < sections.Count; i++) {
+                List<Orb> section = sections[i];
+                if(section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); }))) {
 
-            for (int i = activeHead; i >= 0; i--)
-            {
-                if(i != activeHead)
-                    Orbs[i].Progress = Orbs[activeHead].Progress - (7 * ((activeHead) - i));
+                    for (int j = section.Count - 1; j >= 0; j--) {
+                        if (j != section.Count - 1)
+                            section[j].Progress = section.Last().Progress - (7 * ((section.Count - 1) - j));
 
-                if (Orbs[i].Progress >= Path.Length - 1)
-                {
-                    DestroyAtEnd(Orbs[i]);
+                        if (section[j].Progress >= Path.Length - 1) {
+                            Pop();
 
-                    if(Orbs.Count != 0)
-                        Orbs.Last().Mode = Orbs.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD:OrbMode.TAIL;
-                                                         
+                            if (section.Count != 0)
+                                section.Last().Mode = section.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD : OrbMode.TAIL;
+                            else
+                                sections.Remove(sections.Last());
 
-                    break;
+                            break;
+                        }
+                        
+                        section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
+                    }
+
+
+                    section.Last().Progress += speed * deltaTime;
                 }
-
-                Orbs[i].Position = Path.Points[Math.Max((int)Math.Floor(Orbs[i].Progress), 0)];
             }
+
+
+
         }
 
-        private void DestroyAtEnd(Orb rondure)
+        private void Pop()
         {
-            if (activeHead == Orbs.Count - 1) {
-                activeHead--;
-            }
-            Orbs.Remove(rondure);
+            sections.Last().Remove(sections.Last().Last());
              
         }
 
-        private void DestroyRange(int index, int range) {
-            if(index == 0 && range == Orbs.Count) {
-                Orbs.Clear();
+        private void DestroyRange(int section, int index, int range) {
+            
+
+            if(index == 0 && range == sections[section].Count) {
+                sections[section].Clear();
             }
             else {
 
-                if (index + range >= Orbs.Count - 1)
-                    Orbs[index - 1].Mode = OrbMode.HEAD;
+                if (index + range >= sections[section].Count - 1)
+                    sections[section][index - 1].Mode = OrbMode.HEAD;
                 else if (index == 0) {
-                    Orbs[index + range].Mode = OrbMode.TAIL;
+                    sections[section][index + range].Mode = OrbMode.TAIL;
 
                 }
                 else {
-                    Orbs[index + range].Mode = OrbMode.STRAY;
-                    Orbs[index - 1].Mode = OrbMode.HEAD;
-                    Orbs[index - 1].registerCollision(Orbs);
+                    sections[section][index + range].Mode = OrbMode.STRAY;
+                    sections[section][index - 1].Mode = OrbMode.HEAD;
+                    sections[section][index - 1].registerCollision(sections[section]);
 
                 }
-                Orbs.RemoveRange(index, range);
-                activeHead = Orbs.FindIndex((Orb o) => { return o.isHead(); });
+                sections[section].RemoveRange(index, range);
             }
             //TODO: Recursive Destruction 
         }
@@ -109,11 +116,15 @@ namespace LuxC.model
             DrawPath();
             DrawOrbs();
 
-            for (int i = Orbs.Count - 1; i >= 0; i--) {
-                engine.WriteText(new Point(0, Orbs.Count - i),
-                    $"{i}. {Orbs[i].Color.ToString()} {Orbs[i].Mode.ToString()} + {Orbs[i].Progress}",
-                    i == activeHead ? 7 : 15
-                    ) ;
+            for (int i = sections.Count - 1; i >= 0; i--) {
+                for(int j = sections[i].Count - 1; j >= 0; j--) {
+                    engine.WriteText(new Point(0, sections.Count - i),
+                    $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()} + {sections[i][j].Progress}",
+                    i == activeHead ? 7 : 15);
+
+
+                }
+                    
             }
         }
 
@@ -122,43 +133,58 @@ namespace LuxC.model
         }
 
         private void DrawOrbs() {
-            foreach (Orb orb in Orbs) {
+            foreach(List<Orb> section in sections)
+                foreach (Orb orb in section) {
                 orb.Draw();
             }
         }
 
         public void insert(Orb o) {
+            int section;
             Orb c = (Orb)o.CollidingBodies[0];
+            section = sections.FindIndex((List<Orb> s) => { return s.Contains(c); });
             o.unregisterCollision();
-            insert(o, Orbs.IndexOf(c) + (o.Position.X > c.Position.X ? 1:0));
-
+            insert(section, o, sections[section].IndexOf(c) + (o.Position.X > c.Position.X ? 1:0));
         }
 
-        private void insert(Orb o, int i) {
-            if(i == Orbs.Count) {
-                o.Mode = OrbMode.HEAD;
-                Orbs[i-1].Mode = OrbMode.NORMAL;
-                o.Progress = Orbs[i - 1].Progress + 6;
-                Orbs.Add(o);
-            }
-            else if(i == 0) {
-                o.Mode = OrbMode.TAIL;
-                Orbs[0].Mode = OrbMode.NORMAL;
-                Orbs.Insert(0, o);
-            }
-            else {
-                o.Progress = Orbs[i].Progress;
-                o.Mode = OrbMode.NORMAL;
-                Orbs.Last().Progress += i == 0 ? 0 : 7;
-                Orbs.Insert(i, o);
-            }
-            activeHead++;
-            checkForConsecutives(o);
+        private void insert(int section, Orb o, int i) {
+            // = Active head + 1: Determine if it is closer to the stray, or the head;
+                // Insert after head, reassign head 
+                // Insert before stray, reassign stray 
+            // = Stray: Insert after stray, push next head 
+            // > Stray: insert, push next head 
+            // = Next head 
+
+            //else { //insert somewhere before the active head 
+            //if(i == activeHead + 1) {
+            //    Console.WriteLine();
+            //}
+                if (i == sections[section].Count ) { //Insert after head, and reassign head 
+                    o.Mode = OrbMode.HEAD;
+                    sections[section][i - 1].Mode = OrbMode.NORMAL;
+                    o.Progress = sections[section][i - 1].Progress + 6;
+                    sections[section].Add(o);
+                }
+                else if (i == 0) { // insert at tail 
+                    o.Mode = OrbMode.TAIL;
+                    sections[section][0].Mode = OrbMode.NORMAL;
+                    sections[section].Insert(0, o);
+                }
+                else { //Insert somewhere and push head forward 
+                    o.Progress = sections[section][i].Progress;
+                    o.Mode = OrbMode.NORMAL;
+                    sections[section].Last().Progress += i == 0 ? 0 : 7;
+                    sections[section].Insert(i, o);
+                }
+            //}
+            checkForConsecutives(section,o);
         }
+
 
         public Parade() {
-            Orbs = new List<Orb> {
-            new Orb(OrbColor.BLUE),
+            sections = new List<List<Orb>> {
+                new List<Orb> {
+                           new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLACK),
@@ -168,29 +194,29 @@ namespace LuxC.model
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLUE)
-
+                }
             };
-           // Orbs.Last().Progress = 60;
-            //Orbs[4].Mode = OrbMode.STRAY;
-            Orbs.Last().Mode = OrbMode.HEAD;
-            Orbs.First().Mode = OrbMode.TAIL;
-
-            activeHead = Orbs.FindIndex((Orb o) => { return o.isHead(); });
+           // Orbs.Last().Progress = 60; 
+            //Orbs[4].Mode = OrbMode.STRAY; 
+            sections[0].Last().Mode = OrbMode.HEAD;
+            sections[0].First().Mode = OrbMode.TAIL;
         }
 
 
-        public void checkForConsecutives(Orb o) {
+        public void checkForConsecutives(int section, Orb o) {
+            //TODO rewrite pretty much all of this 
+
             OrbColor color = o.Color;
             bool backSearching = true;
             int consecutives = 1;
             int consecutivesStart = 0;
-            int i = Orbs.IndexOf(o)-1;
+            int i = sections[section].IndexOf(o)-1;
             while (backSearching) {
                 if (i < 0) {
                     backSearching = false;
                     break;
                 }
-                if (Orbs[i].Color.Equals(color)) {
+                if (sections[section][i].Color.Equals(color)) {
                     consecutives++;
                     i--;
                 }
@@ -202,14 +228,14 @@ namespace LuxC.model
             }
 
             bool forwardSearching = true;
-            i = Orbs.IndexOf(o)+1;
+            i = sections[section].IndexOf(o)+1;
             
             while (forwardSearching) {
-                if (i >= Orbs.Count()) {
+                if (i >= sections.Count()) {
                     forwardSearching = false;
                     break;
                 }
-                if(Orbs[i].Color.Equals(color)) {
+                if(sections[section][i].Color.Equals(color)) {
                     consecutives++;
                     i++;
                 }
@@ -219,7 +245,7 @@ namespace LuxC.model
             }
 
             if(consecutives >= 3) {
-                DestroyRange(consecutivesStart, consecutives);
+                DestroyRange(section, consecutivesStart, consecutives);
             }
         }
 

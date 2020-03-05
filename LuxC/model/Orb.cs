@@ -21,11 +21,6 @@ namespace LuxC.model
         internal Orb(OrbColor color){
             SetColor(color);
         }
-
-        public bool isHead() {
-            return this.Mode.Equals(OrbMode.HEAD);
-        }
-
         private void LoadSprite() {
             switch (Color) {
                 case OrbColor.RED:

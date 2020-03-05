@@ -28,7 +28,11 @@ namespace LuxC.model
                 ammo[0] = ammo[1];
                 ammo[1] = GenerateNewOrb();
 
-                firedOrb.registerCollision(parade.Orbs);
+                List<Orb> c = new List<Orb>();
+                foreach(List<Orb> section in parade.sections) {
+                    c.AddRange(section);
+                }
+                firedOrb.registerCollision(c);
 
             }
 
