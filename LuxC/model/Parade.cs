@@ -72,8 +72,8 @@ namespace LuxC.model
                         section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
                     }
 
-
-                    section.Last().Progress += speed * deltaTime;
+                    if (section.Count > 0)
+                        section.Last().Progress += speed * deltaTime;
                 }
             }
 
@@ -204,8 +204,7 @@ namespace LuxC.model
 
 
         public void checkForConsecutives(int section, Orb o) {
-            //TODO rewrite pretty much all of this 
-
+            
             OrbColor color = o.Color;
             bool backSearching = true;
             int consecutives = 1;
