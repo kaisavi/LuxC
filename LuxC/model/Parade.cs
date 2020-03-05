@@ -80,7 +80,7 @@ namespace LuxC.model
             }
             else {
 
-                if (index + range >= sections[section].Count - 1) { // destroy leading orbs and reassign head 
+                if (index + range >= sections[section].Count) { // destroy leading orbs and reassign head 
                     sections[section][index - 1].Mode = OrbMode.HEAD;
                     
                 }
@@ -143,7 +143,7 @@ namespace LuxC.model
             int index = sections[section].IndexOf(c);
             o.unregisterCollision();
             if(index == 0) {
-                if(sections[section][index + 1].Position.X > sections[section][index].Position.X)
+                if(sections[section][index + 1].Position.X > sections[section][index].Position.X && sections[section].Count > 1)
                     insert(section, o, sections[section].IndexOf(c) +
                 ((o.Position.X > c.Position.X) ? 1 : 0));
                 else
@@ -200,8 +200,6 @@ namespace LuxC.model
             new Orb(OrbColor.BLUE)
                 }
             };
-           // Orbs.Last().Progress = 60; 
-            //Orbs[4].Mode = OrbMode.STRAY; 
             sections[0].Last().Mode = OrbMode.HEAD;
             sections[0].First().Mode = OrbMode.TAIL;
         }
