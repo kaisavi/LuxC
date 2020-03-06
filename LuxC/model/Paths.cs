@@ -8,15 +8,25 @@ using System.Threading.Tasks;
 namespace LuxC.model {
     struct Paths {
         internal static Path demo => new Path(new List<Point> {
-
-            new Point(-10,32),
-
-            new Point(100,32),
+            new Point(-10,25),
+            new Point(28,25),
 
         }).Append(new Path(new List<Point> {
-            new Point(100,32),
-            new Point(32,75),
-            new Point(-10,75),
-        })).Cull();
+            new Point(28,25),
+            new Point(38,25),
+            new Point(36,38),
+        })).Append(new Path(new List<Point> {
+            new Point(37,38),
+            new Point(36,92)
+        }).Append(new Path(new List<Point> {
+            new Point(36,92),
+            new Point(36,102),
+            new Point(46,100)
+            
+        })).Append(new Path(new List<Point> {
+            new Point(46,100),
+            new Point(113,101),
+            new Point(190,100)
+        })).Cull());
     }
 }

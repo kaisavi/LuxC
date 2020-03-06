@@ -65,7 +65,7 @@ namespace LuxC.control
                 ballista.Move(-48,DeltaTime);
             if (Engine.GetKey(ConsoleKey.RightArrow))
                 ballista.Move(48,DeltaTime);
-            if (Engine.GetKey(ConsoleKey.Spacebar))
+            if (Engine.GetKeyDown(ConsoleKey.Spacebar))
                 ballista.Fire();
 
             if (Engine.GetKey(ConsoleKey.K))
@@ -76,6 +76,8 @@ namespace LuxC.control
                 cursorPos.X--;
             if (Engine.GetKey(ConsoleKey.L))
                 cursorPos.X++;
+
+            
 
             CheckCollisions();
             Parade.update(DeltaTime);

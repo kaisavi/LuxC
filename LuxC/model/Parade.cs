@@ -12,13 +12,17 @@ namespace LuxC.model
         public Path Path { get; set; } = Paths.demo;
         public List<List<Orb>> sections { get; private set; }
 
-        private int speed = 12;
+        private int speed = 100;
 
         public void update(float deltaTime) {
 
             if (sections.Count > 0) {
                 checkForHeadCollision();
                 advance(deltaTime);
+            }
+
+            if(speed > 24) {
+                speed--;
             }
         }
 
@@ -53,7 +57,7 @@ namespace LuxC.model
                     }
                     int prevPos = section[j].Position.X;
                     section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
-                    section[j].directionOfTravel = section[j].Position.X > prevPos ? 1 : -1;
+                    section[j].directionOfTravel = section[j].Position.X <= prevPos ? -1 : 1;
                 }
 
                 if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
@@ -86,7 +90,7 @@ namespace LuxC.model
                     
                 }
                 else if (index == 0) { // destroy tailing orbs and reassign tail 
-                    sections[section][index + range].Mode = OrbMode.TAIL;
+                    sections[section][index + range].Mode = sections[section].First().Mode;
 
                 }
                 else { // destroy some orbs and assign new head 
@@ -119,7 +123,7 @@ namespace LuxC.model
                 for (int j = sections[i].Count - 1; j >= 0; j--) {
 
                     engine.WriteText(new Point(26 * i, sections[i].Count - j),
-                    $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()} + {sections[i][j].Progress}",
+                    $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()}; {(int)sections[i][j].Progress}; {sections[i][j].directionOfTravel} ",
                     15);
                 }
             }
