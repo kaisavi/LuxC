@@ -12,7 +12,7 @@ namespace LuxC.model
         public Path Path { get; set; } = Paths.demo;
         public List<List<Orb>> sections { get; private set; }
 
-        private int speed = 12;
+        private int speed = 200;
 
         public void update(float deltaTime) {
 
