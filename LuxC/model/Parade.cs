@@ -21,7 +21,7 @@ namespace LuxC.model
                 advance(deltaTime);
             }
 
-            if(speed > 24) {
+            if(speed > 16) {
                 speed--;
             }
         }
