@@ -12,7 +12,7 @@ namespace LuxC.model
         public Path Path { get; set; } = Paths.demo;
         public List<List<Orb>> sections { get; private set; }
 
-        private int speed = 100;
+        private int speed = 12;
 
         public void update(float deltaTime) {
 
@@ -55,9 +55,15 @@ namespace LuxC.model
 
                         break;
                     }
-                    int prevPos = section[j].Position.X;
+                    Point prevPos = section[j].Position;
                     section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
-                    section[j].directionOfTravel = section[j].Position.X <= prevPos ? -1 : 1;
+                    if (!prevPos.Equals(section[j].Position)) {
+                        section[j].dX = section[j].Position.X < prevPos.X ? -1 :
+                                    section[j].Position.X == prevPos.X ? 0 : 1;
+
+                        section[j].dY = section[j].Position.Y < prevPos.Y ? -1 :
+                                        section[j].Position.Y == prevPos.Y ? 0 : 1;
+                    }
                 }
 
                 if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
@@ -123,7 +129,7 @@ namespace LuxC.model
                 for (int j = sections[i].Count - 1; j >= 0; j--) {
 
                     engine.WriteText(new Point(26 * i, sections[i].Count - j),
-                    $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()}; {(int)sections[i][j].Progress}; {sections[i][j].directionOfTravel} ",
+                    $"{i}. {sections[i][j].Color.ToString()} {sections[i][j].Mode.ToString()}; {(int)sections[i][j].Progress}; {sections[i][j].dX}, {sections[i][j].dY} ",
                     15);
                 }
             }
@@ -148,13 +154,29 @@ namespace LuxC.model
             int index = sections[section].IndexOf(c);
             o.unregisterCollision();
 
+            if(sections[section][index].dX == 1) {
+                insert(section, o, sections[section].IndexOf(c) +
+                    (o.Position.X > c.Position.X ? 1 : 0));
+            } else
+            if(sections[section][index].dX == -1) {
+                insert(section, o, sections[section].IndexOf(c) +
+                    (o.Position.X < c.Position.X ? 1 : 0));
+            } else
+            if(sections[section][index].dY == 1) {
+                insert(section, o, sections[section].IndexOf(c) + 1);
+            }
+            else {
+                insert(section, o, sections[section].IndexOf(c));
+            }
+
+            /*
             if (sections[section][index].directionOfTravel == 1)
                 insert(section, o, sections[section].IndexOf(c) +
             ((o.Position.X > c.Position.X) ? 1 : 0));
             else
                 insert(section, o, sections[section].IndexOf(c) +
             ((o.Position.X < c.Position.X) ? 1 : 0));
-
+            */
         }
 
         private void insert(int section, Orb o, int i) {
