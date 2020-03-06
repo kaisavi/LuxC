@@ -8,6 +8,7 @@ namespace LuxC.control
 {
 
     //Console size: 240x132 
+
     class Lux : ConsoleGame
     {
 
@@ -18,6 +19,7 @@ namespace LuxC.control
 
         float time = 0;
         private Point cursorPos = new Point(0,0);
+        public bool running = true;
 
         public override void Create() {
             Drawable.setEngine(Engine);
@@ -30,6 +32,7 @@ namespace LuxC.control
 
             palette.Position = new Point(236, 128);
 
+            
 
         }
 
@@ -59,29 +62,34 @@ namespace LuxC.control
 
 
         public override void Update() {
-            time += DeltaTime;
+            if (Engine.GetKeyDown(ConsoleKey.Escape))
+                running = !running;
+            if(running) {
+                time += DeltaTime;
 
-            if (Engine.GetKey(ConsoleKey.LeftArrow))
-                ballista.Move(-48,DeltaTime);
-            if (Engine.GetKey(ConsoleKey.RightArrow))
-                ballista.Move(48,DeltaTime);
-            if (Engine.GetKeyDown(ConsoleKey.Spacebar))
-                ballista.Fire();
+                if (Engine.GetKey(ConsoleKey.LeftArrow))
+                    ballista.Move(-48,DeltaTime);
+                if (Engine.GetKey(ConsoleKey.RightArrow))
+                    ballista.Move(48,DeltaTime);
+                if (Engine.GetKeyDown(ConsoleKey.Spacebar))
+                    ballista.Fire();
 
-            if (Engine.GetKey(ConsoleKey.K))
-                cursorPos.Y++;
-            if (Engine.GetKey(ConsoleKey.I))
-                cursorPos.Y--;
-            if (Engine.GetKey(ConsoleKey.J))
-                cursorPos.X--;
-            if (Engine.GetKey(ConsoleKey.L))
-                cursorPos.X++;
+                if (Engine.GetKey(ConsoleKey.K))
+                    cursorPos.Y++;
+                if (Engine.GetKey(ConsoleKey.I))
+                    cursorPos.Y--;
+                if (Engine.GetKey(ConsoleKey.J))
+                    cursorPos.X--;
+                if (Engine.GetKey(ConsoleKey.L))
+                    cursorPos.X++;
 
             
+            
+                CheckCollisions();
+                Parade.update(DeltaTime);
+                ballista.Update(DeltaTime);
+            }
 
-            CheckCollisions();
-            Parade.update(DeltaTime);
-            ballista.Update(DeltaTime);
         }
 
         private void CheckCollisions() {
