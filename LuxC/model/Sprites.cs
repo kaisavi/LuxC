@@ -121,6 +121,34 @@ namespace LuxC.model
             new Fragment(new Point(1,2),ConsoleColor.Black,ConsoleCharacter.Light)
         };
 
+        public static readonly List<Fragment> tail = new List<Fragment> {
+                        new Fragment(new Point(-1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Fragment(new Point(0,-2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Fragment(new Point(1,-2),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Fragment(new Point(-2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Fragment(new Point(-1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Fragment(new Point(0,-1),ConsoleColor.Black,ConsoleCharacter.Dark),
+            new Fragment(new Point(1,-1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Fragment(new Point(2,-1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Fragment(new Point(-2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Fragment(new Point(-1,0),ConsoleColor.Black,ConsoleCharacter.Dark),
+            new Fragment(new Point(0,0),ConsoleColor.White,ConsoleCharacter.Full),
+            new Fragment(new Point(1,0),ConsoleColor.Black,ConsoleCharacter.Dark),
+            new Fragment(new Point(2,0),ConsoleColor.White,ConsoleCharacter.Dark),
+
+            new Fragment(new Point(-2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Fragment(new Point(-1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Fragment(new Point(0,1),ConsoleColor.Black,ConsoleCharacter.Dark),
+            new Fragment(new Point(1,1),ConsoleColor.Gray,ConsoleCharacter.Medium),
+            new Fragment(new Point(2,1),ConsoleColor.White,ConsoleCharacter.Medium),
+
+            new Fragment(new Point(-1,2),ConsoleColor.White,ConsoleCharacter.Medium),
+            new Fragment(new Point(0,2),ConsoleColor.White,ConsoleCharacter.Dark),
+            new Fragment(new Point(1,2),ConsoleColor.White,ConsoleCharacter.Medium)
+        };
+
         public static readonly List<Fragment> palette = new List<Fragment> { 
             new Fragment(new Point(0, 0)),
             new Fragment(new Point(0, 1),ConsoleColor.Yellow),

@@ -30,7 +30,7 @@ namespace LuxC.model
 
                 List<Orb> c = new List<Orb>();
                 foreach(List<Orb> section in parade.sections) {
-                    c.AddRange(section);
+                    c.AddRange( section.Where( (Orb o) => { return !o.Mode.Equals(OrbMode.TAIL); } ) );
                 }
                 firedOrb.registerCollision(c);
 

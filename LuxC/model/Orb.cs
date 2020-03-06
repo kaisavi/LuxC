@@ -24,6 +24,9 @@ namespace LuxC.model
         }
         private void LoadSprite() {
             switch (Color) {
+                case OrbColor.NONE:
+                    fragments = Sprites.tail;
+                    break;
                 case OrbColor.RED:
                     fragments = Sprites.redOrb;
                     break;
@@ -59,6 +62,7 @@ namespace LuxC.model
 
 
 internal enum OrbColor {
+    NONE = -1, 
     RED = 0,
     BLUE = 1,
     WHITE = 2,

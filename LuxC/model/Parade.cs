@@ -99,8 +99,8 @@ namespace LuxC.model
                     sections[section][index + range].Mode = sections[section].First().Mode;
 
                 }
-                else { // destroy some orbs and assign new head 
-                    sections[section][index - 1].Mode = OrbMode.HEAD;
+                else { // destroy some orbs and assign new head or keep tail 
+                    sections[section][index - 1].Mode = sections[section][index - 1].Mode.Equals(OrbMode.TAIL) ? OrbMode.TAIL : OrbMode.HEAD;
 
                 }
                 double newProgress = sections[section][index].Progress; //Where to locate the section of orbs after destruction 
@@ -168,15 +168,6 @@ namespace LuxC.model
             else {
                 insert(section, o, sections[section].IndexOf(c));
             }
-
-            /*
-            if (sections[section][index].directionOfTravel == 1)
-                insert(section, o, sections[section].IndexOf(c) +
-            ((o.Position.X > c.Position.X) ? 1 : 0));
-            else
-                insert(section, o, sections[section].IndexOf(c) +
-            ((o.Position.X < c.Position.X) ? 1 : 0));
-            */
         }
 
         private void insert(int section, Orb o, int i) {
@@ -209,7 +200,7 @@ namespace LuxC.model
         public Parade() {
             sections = new List<List<Orb>> {
                 new List<Orb> {
-                           new Orb(OrbColor.BLUE),
+                           new Orb(OrbColor.NONE),
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLUE),
             new Orb(OrbColor.BLACK),
