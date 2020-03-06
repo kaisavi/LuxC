@@ -103,7 +103,7 @@ namespace LuxC.model
                     sections[section][index - 1].Mode = sections[section][index - 1].Mode.Equals(OrbMode.TAIL) ? OrbMode.TAIL : OrbMode.HEAD;
 
                 }
-                double newProgress = sections[section][index].Progress; //Where to locate the section of orbs after destruction 
+                double newProgress = sections[section][index].Progress - 7; //Where to locate the section of orbs after destruction 
                 //Split into two sections
                 sections.Insert(section+1,sections[section].Skip(range+index).ToList());
                 sections[section] = sections[section].Take(index).ToList();
@@ -113,6 +113,9 @@ namespace LuxC.model
                 }
                 if (sections[section + 1].Count == 0)
                     sections.RemoveAt(section+1);
+                else {
+                    sections[section + 1].Last().Progress -= 7;
+                }
                 sections[section].Last().Progress = newProgress;
             }
             //TODO: Recursive Destruction 
