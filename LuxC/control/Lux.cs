@@ -95,9 +95,11 @@ namespace LuxC.control
             if (Engine.GetKey(ConsoleKey.L))
                 cursorPos.X++;
             if (Engine.GetKey(ConsoleKey.OemComma))
-                timeScale++;
+                timeScale-= .1f;
             if (Engine.GetKey(ConsoleKey.OemPeriod))
-                timeScale--;
+                timeScale+= .1f;
+            if (Engine.GetKey(ConsoleKey.M))
+                timeScale = 1;
         }
 
         private void CheckCollisions() {
