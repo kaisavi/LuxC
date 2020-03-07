@@ -29,9 +29,11 @@ namespace LuxC.model
         private void checkForHeadCollision() {
             for(int i = 0; i < sections.Count - 1; i++) {
                 if(sections[i].Last().Progress >= sections[i + 1].First().Progress - 6) {
+                    Orb o = sections[i].Last();
                     sections[i].Last().Mode.Equals(OrbMode.NORMAL);
                     sections[i].AddRange(sections[i + 1]);
                     sections.Remove(sections[i + 1]);
+                    checkForConsecutives(i, o);
                 }
             }
                 
@@ -47,20 +49,19 @@ namespace LuxC.model
 
                     if (section[j].Progress >= Path.Length - 1) {
                         Pop();
-
-                        if (section.Count != 0)
-                            section.Last().Mode = section.Last().Mode != OrbMode.TAIL ? OrbMode.HEAD : OrbMode.TAIL;
-                        else
-                            sections.Remove(sections.Last());
-
                         break;
                     }
                     updateDeltaPos(section, j);
                 }
 
                 if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
-                        section.Last().Progress += speed * deltaTime;
+                     section.Last().Progress += speed * deltaTime;
+                    
                 }
+                if (sections.Count > 1 && i != 0)
+                    if (section.First().Color.Equals(sections[i - 1].Last().Color)) {
+                    section.Last().Progress -= speed * 2 * deltaTime;
+                    }
             }
 
 
@@ -82,7 +83,10 @@ namespace LuxC.model
         private void Pop()
         {
             sections.Last().Remove(sections.Last().Last());
-             
+            if (sections.Last().Count != 0)
+                sections.Last().Last().Mode = sections.Last().Last().Mode != OrbMode.TAIL ? OrbMode.HEAD : OrbMode.TAIL;
+            else
+                sections.Remove(sections.Last());
         }
 
         private void DestroyRange(int section, int index, int range) {
