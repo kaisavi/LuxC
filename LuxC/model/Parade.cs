@@ -55,25 +55,28 @@ namespace LuxC.model
 
                         break;
                     }
-                    Point prevPos = section[j].Position;
-                    section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
-                    if (!prevPos.Equals(section[j].Position)) {
-                        section[j].dX = section[j].Position.X < prevPos.X ? -1 :
-                                    section[j].Position.X == prevPos.X ? 0 : 1;
-
-                        section[j].dY = section[j].Position.Y < prevPos.Y ? -1 :
-                                        section[j].Position.Y == prevPos.Y ? 0 : 1;
-                    }
+                    updateDeltaPos(section, j);
                 }
 
                 if (section.Exists(((Orb o) => { return o.Mode.Equals(OrbMode.TAIL); })) && section.Count > 0) {
                         section.Last().Progress += speed * deltaTime;
                 }
-                
             }
 
 
 
+        }
+
+        private void updateDeltaPos(List<Orb> section, int j) {
+            Point prevPos = section[j].Position;
+            section[j].Position = Path.Points[Math.Max((int)Math.Floor(section[j].Progress), 0)];
+            if (!prevPos.Equals(section[j].Position)) {
+                section[j].dX = section[j].Position.X < prevPos.X ? -1 :
+                            section[j].Position.X == prevPos.X ? 0 : 1;
+
+                section[j].dY = section[j].Position.Y < prevPos.Y ? -1 :
+                                section[j].Position.Y == prevPos.Y ? 0 : 1;
+            }
         }
 
         private void Pop()
@@ -89,42 +92,39 @@ namespace LuxC.model
                 sections[section].Clear();
                 sections.RemoveAt(section);
             }
-            else {
+            else if (index + range >= sections[section].Count) { // destroy leading orbs and reassign head 
+                sections[section][index - 1].Mode = OrbMode.HEAD;
 
-                if (index + range >= sections[section].Count) { // destroy leading orbs and reassign head 
-                    sections[section][index - 1].Mode = OrbMode.HEAD;
-                    
-                }
-                else if (index == 0) { // destroy tailing orbs and reassign tail 
-                    sections[section][index + range].Mode = sections[section].First().Mode;
-
-                }
-                else { // destroy some orbs and assign new head or keep tail 
-                    sections[section][index - 1].Mode = sections[section][index - 1].Mode.Equals(OrbMode.TAIL) ? OrbMode.TAIL : OrbMode.HEAD;
-
-                }
-                double newProgress = sections[section][index].Progress - 7; //Where to locate the section of orbs after destruction 
-                //Split into two sections
-                sections.Insert(section+1,sections[section].Skip(range+index).ToList());
-                sections[section] = sections[section].Take(index).ToList();
-                if (sections[section].Count == 0) {
-                    sections.RemoveAt(section);
-                    return;
-                }
-                if (sections[section + 1].Count == 0)
-                    sections.RemoveAt(section+1);
-                else {
-                    sections[section + 1].Last().Progress -= 7;
-                }
-                sections[section].Last().Progress = newProgress;
             }
-            //TODO: Recursive Destruction 
-        }
+            else if (index == 0) { // destroy tailing orbs and reassign tail 
+                sections[section][index + range].Mode = sections[section].First().Mode;
+
+            }
+            else { // destroy some orbs and assign new head or keep tail 
+                sections[section][index - 1].Mode = sections[section][index - 1].Mode.Equals(OrbMode.TAIL) ? OrbMode.TAIL : OrbMode.HEAD;
+
+            }
+            double newProgress = sections[section][index].Progress - 7; //Where to locate the section of orbs after destruction 
+                                                                        //Split into two sections
+            sections.Insert(section + 1, sections[section].Skip(range + index).ToList());
+            sections[section] = sections[section].Take(index).ToList();
+            if (sections[section].Count == 0) {
+                sections.RemoveAt(section);
+                return;
+            }
+            if (sections[section + 1].Count == 0)
+                sections.RemoveAt(section + 1);
+            else {
+                sections[section + 1].Last().Progress -= 7;
+            }
+            sections[section].Last().Progress = newProgress;
+        //TODO: Recursive Destruction 
+    }
 
         public override void Draw() {
             DrawPath();
             DrawOrbs();
-            DrawDebug();
+            //DrawDebug();
         }
 
         private void DrawDebug() {
