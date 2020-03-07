@@ -93,6 +93,7 @@ namespace LuxC.model {
 
         })).Append(new Path(new List<Point> {
             new Point(134,22),
+            new Point(150,23),
             new Point(178,22)
 
         })).Append(new Path(new List<Point> {
@@ -101,6 +102,7 @@ namespace LuxC.model {
 
         })).Append(new Path(new List<Point> {
             new Point(198,22),
+            new Point(200,23),
             new Point(250,22)
 
         }))
