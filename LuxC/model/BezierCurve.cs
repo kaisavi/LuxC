@@ -146,7 +146,7 @@ namespace LuxC.model
             List<Point> points = new List<Point>();
 
             for (int i = 1; i != p.Length - 1; i += 2) {
-                points.Add(new Point((int)p[i + 1], (int) p[i]));
+                points.Add(new Point((int)Math.Floor(p[i + 1]), (int) Math.Floor(p[i])));
             }
             
             points = points.Distinct().ToList();
