@@ -20,8 +20,10 @@ namespace LuxC.model
                 checkForHeadCollision();
                 advance(deltaTime);
             }
-            if (sections.Count == 1 && sections[0].Count == 1)
+            if (sections.Count == 1 && sections[0].Count == 1) {
                 sections.Clear();
+            }
+                
 
             if(speed > 16) {
                 speed--;
@@ -35,6 +37,7 @@ namespace LuxC.model
                     sections[i].Last().Mode.Equals(OrbMode.NORMAL);
                     sections[i].AddRange(sections[i + 1]);
                     sections.Remove(sections[i + 1]);
+                    if(sections[i][sections[i].IndexOf(o)+1].Color.Equals(o.Color))
                     checkForConsecutives(i, o);
                 }
             }
