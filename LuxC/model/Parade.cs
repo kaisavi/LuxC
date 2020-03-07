@@ -61,7 +61,7 @@ namespace LuxC.model
                     
                 }
                 if (sections.Count > 1 && i != 0)
-                    if (section.First().Color.Equals(sections[i - 1].Last().Color)) {
+                    if (section.First().Color.Equals(sections[i - 1].Last().Color) || sections[i-1].Last().Color.Equals(OrbColor.NONE)) {
                     section.Last().Progress -= speed * 2 * deltaTime;
                     }
             }
