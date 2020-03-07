@@ -71,6 +71,7 @@
     <Compile Include="control\Lux.cs" />
     <Compile Include="model\BezierCurve.cs" />
     <Compile Include="model\Ballista.cs" />
+    <Compile Include="model\OrbGenerator.cs" />
     <Compile Include="model\Parade.cs" />
     <Compile Include="model\CollisionManager.cs" />
     <Compile Include="model\Drawable.cs" />

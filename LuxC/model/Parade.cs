@@ -10,7 +10,7 @@ namespace LuxC.model
     //Console size: 240x132
     class Parade : Drawable {
         public Path Path { get; set; } = Paths.demo;
-        public List<List<Orb>> sections { get; private set; }
+        public List<List<Orb>> sections { get; private set; } = new List<List<Orb>>();
 
         private int speed = 80;
 
@@ -207,20 +207,7 @@ namespace LuxC.model
 
 
         public Parade() {
-            sections = new List<List<Orb>> {
-                new List<Orb> {
-                           new Orb(OrbColor.NONE),
-            new Orb(OrbColor.BLUE),
-            new Orb(OrbColor.BLUE),
-            new Orb(OrbColor.BLACK),
-            new Orb(OrbColor.BLACK),
-            new Orb(OrbColor.BLACK),
-            new Orb(OrbColor.BLACK),
-            new Orb(OrbColor.BLUE),
-            new Orb(OrbColor.BLUE),
-            new Orb(OrbColor.BLUE)
-                }
-            };
+            sections.Add(new OrbGenerator().GenerateOrbs(35));
             sections[0].Last().Mode = OrbMode.HEAD;
             sections[0].First().Mode = OrbMode.TAIL;
         }
