@@ -14,7 +14,14 @@ namespace LuxC.control
         static void Main(string[] args)
         {
             Lux lux = new Lux();
-            lux.Construct(240, 132, 8, 8, FramerateMode.Unlimited);
+            if (args[0].Equals("-demo")) {
+                while(true) {
+                    lux.demo = true;
+                    lux.Construct(240, 132, 8, 8, FramerateMode.Unlimited);
+                }
+            } else {
+                lux.Construct(240, 132, 8, 8, FramerateMode.Unlimited);
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using ConsoleGameEngine;
 using LuxC.model;
 using System.Threading;
+using System.Diagnostics;
 
 namespace LuxC.control
 {
@@ -20,19 +21,24 @@ namespace LuxC.control
         float time = 0;
         private Point cursorPos = new Point(0,0);
         public bool running = true;
+        public bool demo = false;
 
         public override void Create() {
             Drawable.setEngine(Engine);
             CollisionSprite.Init(new CollisionManager());
-            Engine.Borderless();
+            if (!demo) {
+                Engine.Borderless();
+                Console.Title = "LuxC";
+            }
+            else
+                Console.Title = "LuxC Demo";
+                
             Engine.SetBackground(8);
 
             Parade = new Parade();
             ballista = new Ballista(Parade);
 
-            palette.Position = new Point(236, 128);
-
-            
+            palette.Position = new Point(236, 128);            
 
         }
 
