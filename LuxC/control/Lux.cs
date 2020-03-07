@@ -9,7 +9,6 @@ namespace LuxC.control
 {
 
     //Console size: 240x132 
-
     class Lux : ConsoleGame
     {
 
@@ -18,9 +17,10 @@ namespace LuxC.control
 
         PaletteSprite palette = new PaletteSprite();
 
-        float time = 0;
+        private float time = 0;
+        private float timeScale = 1;
         private Point cursorPos = new Point(0,0);
-        public bool running = true;
+        private bool running = true;
         public bool demo = false;
 
         public override void Create() {
@@ -68,6 +68,8 @@ namespace LuxC.control
 
 
         public override void Update() {
+            DeltaTime *= timeScale;
+
             if (Engine.GetKeyDown(ConsoleKey.Escape))
                 running = !running;
             if(running) {
@@ -79,10 +81,6 @@ namespace LuxC.control
                     ballista.Move(48,DeltaTime);
                 if (Engine.GetKeyDown(ConsoleKey.Spacebar))
                     ballista.Fire();
-
-          
-
-            
             
                 CheckCollisions();
                 Parade.update(DeltaTime);
@@ -96,6 +94,10 @@ namespace LuxC.control
                 cursorPos.X--;
             if (Engine.GetKey(ConsoleKey.L))
                 cursorPos.X++;
+            if (Engine.GetKey(ConsoleKey.OemComma))
+                timeScale++;
+            if (Engine.GetKey(ConsoleKey.OemPeriod))
+                timeScale--;
         }
 
         private void CheckCollisions() {
