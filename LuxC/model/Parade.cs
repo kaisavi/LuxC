@@ -20,6 +20,8 @@ namespace LuxC.model
                 checkForHeadCollision();
                 advance(deltaTime);
             }
+            if (sections.Count == 1 && sections[0].Count == 1)
+                sections.Clear();
 
             if(speed > 16) {
                 speed--;
@@ -123,7 +125,6 @@ namespace LuxC.model
                 sections[section + 1].Last().Progress -= 7;
             }
             sections[section].Last().Progress = newProgress;
-        //TODO: Recursive Destruction 
     }
 
         public override void Draw() {
