@@ -91,6 +91,7 @@ namespace LuxC.model
             if(index == 0 && range == sections[section].Count) { //destroy all orbs in a section 
                 sections[section].Clear();
                 sections.RemoveAt(section);
+                return;
             }
             else if (index + range >= sections[section].Count) { // destroy leading orbs and reassign head 
                 sections[section][index - 1].Mode = OrbMode.HEAD;
