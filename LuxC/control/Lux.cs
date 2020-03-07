@@ -74,14 +74,7 @@ namespace LuxC.control
                 if (Engine.GetKeyDown(ConsoleKey.Spacebar))
                     ballista.Fire();
 
-                if (Engine.GetKey(ConsoleKey.K))
-                    cursorPos.Y++;
-                if (Engine.GetKey(ConsoleKey.I))
-                    cursorPos.Y--;
-                if (Engine.GetKey(ConsoleKey.J))
-                    cursorPos.X--;
-                if (Engine.GetKey(ConsoleKey.L))
-                    cursorPos.X++;
+          
 
             
             
@@ -89,7 +82,14 @@ namespace LuxC.control
                 Parade.update(DeltaTime);
                 ballista.Update(DeltaTime);
             }
-
+            if (Engine.GetKey(ConsoleKey.K))
+                cursorPos.Y++;
+            if (Engine.GetKey(ConsoleKey.I))
+                cursorPos.Y--;
+            if (Engine.GetKey(ConsoleKey.J))
+                cursorPos.X--;
+            if (Engine.GetKey(ConsoleKey.L))
+                cursorPos.X++;
         }
 
         private void CheckCollisions() {
