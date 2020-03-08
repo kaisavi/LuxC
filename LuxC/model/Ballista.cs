@@ -78,7 +78,6 @@ namespace LuxC.model
             engine.SetPixel(Position, getHoldColor(ammo[1].Color));
             if(firedOrb != null) {
                 firedOrb.Draw();
-                engine.WriteText(new Point(224, 4), firedOrb.CollidingBodies.Count().ToString(), 15);
             }
                 
             

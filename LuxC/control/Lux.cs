@@ -59,13 +59,15 @@ namespace LuxC.control
                     Parade.Draw();
                     ballista.Draw();
                     break;
-
+                case "gameover":
+                    Engine.WriteFiglet(new Point(60, 54), "Game Over", fig, 12, 0);
+                    break;
             }
             
 
        
 
-            DrawDebug();
+            //DrawDebug();
 
             Engine.DisplayBuffer();
         }

@@ -11,7 +11,7 @@ namespace LuxC.model
     class Parade : Drawable {
         public Path Path { get; set; } = Paths.demo;
         public List<List<Orb>> sections { get; private set; } = new List<List<Orb>>();
-
+        public int Health { get; private set; } = 10;
         private int speed = 100;
 
         public void update(float deltaTime) {
@@ -115,7 +115,7 @@ namespace LuxC.model
 
             }
             double newProgress = sections[section][index].Progress - 7; //Where to locate the section of orbs after destruction 
-                                                                        //Split into two sections
+            //Split into two sections
             sections.Insert(section + 1, sections[section].Skip(range + index).ToList());
             sections[section] = sections[section].Take(index).ToList();
             if (sections[section].Count == 0) {
