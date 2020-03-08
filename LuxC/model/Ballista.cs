@@ -48,7 +48,7 @@ namespace LuxC.model
 
             fragments = Sprites.ballista;
             for (int i = 0; i < 2; i++)
-                ammo[i] = new Orb(OrbColor.BLUE);
+                ammo[i] = new OrbGenerator().GenerateOrbs(2)[i];
             firedOrb = new Orb(OrbColor.RED);
             Position = new Point(120, 128);
         }
